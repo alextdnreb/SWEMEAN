@@ -1,3 +1,12 @@
-<span>Titel</span>
-<span><i class="material-icons">search</i>Suchen</span>
-<swe-login-logout></swe-login-logout>
+<div class="swe-desktop-menu">
+  <span>Titel</span>
+  <span><i class="material-icons">search</i>Suche</span>
+  <swe-login-logout></swe-login-logout>
+</div>
+<button class="swe-mobile-menu" mat-button [matMenuTriggerFor]="menu">
+  <i class="material-icons">menu</i>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Suche</button>
+  <button mat-menu-item><swe-login-logout></swe-login-logout></button>
+</mat-menu>

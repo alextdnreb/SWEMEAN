@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
     selector: 'swe-nav',
     templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
     constructor(public dialog: MatDialog) {
