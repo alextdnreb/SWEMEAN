@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from './login-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * Komponente f&uuml;r das Login mit dem Tag &lt;hs-login-logout&gt;.
@@ -30,6 +31,7 @@ import { LoginDialogComponent } from './login-dialog.component';
 @Component({
     selector: 'swe-login-logout',
     templateUrl: './login-logout.component.html',
+    styleUrls: ['./login-logout.component.scss'],
 })
 export class LoginLogoutComponent implements OnInit, OnDestroy {
     username: string | undefined;
@@ -42,6 +44,7 @@ export class LoginLogoutComponent implements OnInit, OnDestroy {
         private readonly authService: AuthService,
         private readonly router: Router,
         public dialog: MatDialog,
+        private snackBar: MatSnackBar,
     ) {
         console.log('LoginLogoutComponent.constructor()');
     }
@@ -88,8 +91,15 @@ export class LoginLogoutComponent implements OnInit, OnDestroy {
             if (this.notLoggedIn && !event) {
                 // Noch nicht eingeloggt und ein Login-Event kommt, d.h.
                 // es gab einen Login-Versuch, der aber fehlerhaft (= false) war
-                // TODO: Anzeige des fehlgeschlagenen Logins
                 console.warn('AuthComponent: Falsche Login-Daten', event);
+
+                this.snackBar.open('Falsche Login-Daten', 'Schließen', {
+                    duration: 3000,
+                    panelClass: 'swe-error-snackbar',
+                });
+                if (!this.dialog.openDialogs.length) {
+                    this.openDialog();
+                }
             }
             this.notLoggedIn = !event;
             console.log('AuthComponent.notLoggedIn:', this.notLoggedIn);

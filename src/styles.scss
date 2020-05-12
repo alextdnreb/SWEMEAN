@@ -38,3 +38,11 @@ body {
 .material-icons {
   vertical-align: middle;
 }
+.swe-error-snackbar {
+  z-index: 1001;
+  background-color: red !important;
+  color: white !important;
+}
+.swe-error-snackbar button {
+  color: white !important;
+}

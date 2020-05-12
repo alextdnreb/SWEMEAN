@@ -20,11 +20,17 @@ import { CommonModule } from '@angular/common';
 import { LoginDialogModule } from './login-dialog.module';
 import { LoginLogoutComponent } from './login-logout.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgModule } from '@angular/core';
 
 @NgModule({
     declarations: [LoginLogoutComponent],
     exports: [LoginLogoutComponent],
-    imports: [CommonModule, MatDialogModule, LoginDialogModule],
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        LoginDialogModule,
+        MatSnackBarModule,
+    ],
 })
 export class LoginLogoutModule {}
