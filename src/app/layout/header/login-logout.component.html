@@ -1,0 +1,15 @@
+<span
+  *ngIf="notLoggedIn; else loggedIn"
+  style="cursor: pointer;"
+  (click)="openDialog()"
+>
+  <i class="material-icons">perm_identity</i>
+  Login
+</span>
+
+<ng-template #loggedIn>
+  <button type="submit" class="btn btn-primary" (click)="onLogout()">
+    <span class="mr-1">Logout</span>
+    <i class="material-icons">chevron_right</i>
+  </button>
+</ng-template>

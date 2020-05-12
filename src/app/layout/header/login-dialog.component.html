@@ -1,0 +1,47 @@
+<div class="swe-dialog-container">
+  <h1 mat-dialog-title>Anmelden</h1>
+  <mat-dialog-content>
+    <mat-form-field
+      ><mat-label for="usernameInput">
+        <small>Benutzername</small>
+      </mat-label>
+      <input
+        matInput
+        id="usernameInput"
+        type="search"
+        tabindex="1"
+        autocomplete="off"
+        required
+        [(ngModel)]="data.username"
+        name="username"
+    /></mat-form-field>
+    <mat-form-field>
+      <mat-label for="passwordInput">
+        <small>Passwort</small>
+      </mat-label>
+      <input
+        matInput
+        id="passwordInput"
+        type="password"
+        tabindex="2"
+        autocomplete="off"
+        required
+        [(ngModel)]="data.password"
+        name="password"
+      />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="swe-login-submit"
+      (click)="onSubmit()"
+      tabindex="3"
+    >
+      Send
+    </button>
+  </mat-dialog-actions>
+</div>
