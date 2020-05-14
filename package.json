@@ -1,6 +1,7 @@
 {
   "name": "acme",
   "version": "1.0.0",
+  "main": "./src/main.js",
   "license": "GPL-3.0-or-later",
   "licenses": [
     {
@@ -18,7 +19,9 @@
     "start:nginx": "ts-node -P scripts/tsconfig.json scripts/nginx",
     "start:hs": "http-server -p 443 --ssl --key config\\webserver\\https\\key.pem --cert config\\webserver\\https\\certificate.cer --proxy https://localhost:8443 -c-1 .... dist\\acme",
     "start:ORIG": "ng serve",
-    "build": "ng build",
+    "start:electron": "electron .",
+    "electron:build": "ng build && electron .",
+    "build": "ng build && electron .",
     "build:prod": "ng build --prod",
     "browserslist": "npx browserslist",
     "clean": "ts-node -P scripts/tsconfig.json scripts/clean",
@@ -56,6 +59,7 @@
     "@angular/service-worker": "10.0.0-next.3",
     "bootstrap": "4.4.1",
     "chart.js": "2.9.3",
+    "electron": "8.2.5",
     "jquery": "3.5.0",
     "popper.js": "1.16.1",
     "rxjs": "6.5.5",
