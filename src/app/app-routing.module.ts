@@ -16,6 +16,15 @@ const routes: Routes = [
         path: HOME_PATH,
         component: HomeComponent,
     },
+    {
+        path: 'kunden',
+        // Lazy Loading durch dynamische Imports
+        // loadChildren statt component wie bei 'home'
+        loadChildren: async () => {
+            const module = await import('./kunde/kunde-routing.module');
+            return module.KundeRoutingModule;
+        },
+    },
 ];
 
 @NgModule({

@@ -1,14 +1,12 @@
 <div class="swe-desktop-menu">
-  <span>Titel</span>
-  <span style="padding: 0 10px;"
-    ><i class="material-icons">search</i>Suche</span
-  >
+  <a routerLink="/">Titel</a>
+  <a routerLink="/kunden/suche"><i class="material-icons">search</i>Suche</a>
   <swe-login-logout style="float: right;"></swe-login-logout>
 </div>
 <button class="swe-mobile-menu" mat-button [matMenuTriggerFor]="menu">
   <i class="material-icons">menu</i>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>Suche</button>
+  <a routerLink="/kunden/suche" mat-menu-item>Suche</a>
   <button mat-menu-item><swe-login-logout></swe-login-logout></button>
 </mat-menu>
