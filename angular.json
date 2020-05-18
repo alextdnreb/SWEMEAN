@@ -80,7 +80,9 @@
           },
           "configurations": {
             "de": {
-              "localize": ["de"],
+              "localize": [
+                "de"
+              ],
               "main": "src/main.ts"
             },
             "production": {
@@ -139,5 +141,8 @@
       }
     }
   },
-  "defaultProject": "acme"
+  "defaultProject": "acme",
+  "cli": {
+    "analytics": "23cf4f63-781a-4db6-a1cb-44deeb615bc5"
+  }
 }
