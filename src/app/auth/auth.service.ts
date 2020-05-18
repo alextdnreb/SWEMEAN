@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { BasicAuthService } from './basic-auth.service';
 import { CookieService } from './cookie.service';
 import { Injectable } from '@angular/core';
-import { JwtService } from './jwt.service';
 import { Subject } from 'rxjs';
 
 export const ROLLE_ADMIN = 'admin';
@@ -30,10 +30,11 @@ export class AuthService {
     // Subject statt Observable:
     // in login() und logout() wird Subject.next() aufgerufen
     private readonly _isLoggedInSubject = new Subject<boolean>();
-    private readonly _rollenSubject = new Subject<Array<string>>();
+
+    private readonly _rollenSubject = new Subject<string>();
 
     constructor(
-        private readonly jwtService: JwtService,
+        private readonly basicAuthService: BasicAuthService,
         private readonly cookieService: CookieService,
     ) {
         console.log('AuthService.constructor()');
@@ -48,10 +49,10 @@ export class AuthService {
         console.log(
             `AuthService.login(): username=${username}, password=${password}`,
         );
-        let rollen: Array<string> = [];
+        let rollen = '';
         try {
             // this.basicAuthService.login(username, password)
-            rollen = await this.jwtService.login(username, password);
+            rollen = await this.basicAuthService.login(username, password);
             console.log('AuthService.login()', rollen);
             this.isLoggedInSubject.next(true);
         } catch (err) {
@@ -69,12 +70,13 @@ export class AuthService {
         console.warn('AuthService.logout()');
         this.cookieService.deleteAuthorization();
         this.isLoggedInSubject.next(false);
-        this.rollenSubject.next([]);
+        this.rollenSubject.next('');
     }
 
     get isLoggedInSubject() {
         return this._isLoggedInSubject;
     }
+
     get rollenSubject() {
         return this._rollenSubject;
     }
