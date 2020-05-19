@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'swe-header',
     templateUrl: './header.component.html',
-    styles: [],
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
     constructor() {
