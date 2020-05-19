@@ -39,6 +39,7 @@
       type="submit"
       class="swe-login-submit"
       (click)="onSubmit()"
+      [disabled]="!data.password || !data.username"
       tabindex="3"
     >
       Send

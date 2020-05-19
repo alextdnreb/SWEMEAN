@@ -19,6 +19,7 @@
 import { CommonModule } from '@angular/common';
 import { LoginDialogModule } from './login-dialog.module';
 import { LoginLogoutComponent } from './login-logout.component';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgModule } from '@angular/core';
@@ -31,6 +32,7 @@ import { NgModule } from '@angular/core';
         MatDialogModule,
         LoginDialogModule,
         MatSnackBarModule,
+        MatButtonModule,
     ],
 })
 export class LoginLogoutModule {}
