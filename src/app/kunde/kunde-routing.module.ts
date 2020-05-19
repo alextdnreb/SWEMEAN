@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminGuard } from '../auth/admin.guard';
 import { CreateKundeComponent } from './create-kunde/create-kunde.component';
 import { DetailsKundeComponent } from './details-kunde/details-kunde.component';
 import { NgModule } from '@angular/core';
@@ -17,8 +18,13 @@ const routes: Routes = [
     {
         path: ':id',
         component: DetailsKundeComponent,
+        canActivate: [AdminGuard],
     },
-    { path: ':id/update', component: UpdateKundeComponent },
+    {
+        path: ':id/update',
+        component: UpdateKundeComponent,
+        canActivate: [AdminGuard],
+    },
 ];
 
 @NgModule({

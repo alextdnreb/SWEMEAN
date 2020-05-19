@@ -35,7 +35,6 @@ export class NavComponent implements OnInit, OnDestroy {
 
     private subscribeIsAdmin() {
         const next = (event: Array<string>) => {
-            console.log(event);
             this.isAdmin = event !== undefined && event.includes(ROLLE_ADMIN);
             console.log('NavComponent.isAdmin:', this.isAdmin);
         };

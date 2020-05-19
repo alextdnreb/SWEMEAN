@@ -93,6 +93,6 @@ export class BasicAuthService {
             basicAuth,
             roles,
         );
-        return json;
+        return roles.split(',');
     }
 }
