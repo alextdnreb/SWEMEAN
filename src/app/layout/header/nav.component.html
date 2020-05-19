@@ -2,11 +2,16 @@
   <a routerLink="/">Titel</a>
   <a routerLink="/kunden/suche"><i class="material-icons">search</i>Suche</a>
   <swe-login-logout style="float: right;"></swe-login-logout>
+  <a routerLink="/kunden/create" *ngIf="isAdmin"
+    ><i class="material-icons">person_add</i>Erstellen</a
+  >
 </div>
 <button class="swe-mobile-menu" mat-button [matMenuTriggerFor]="menu">
   <i class="material-icons">menu</i>
 </button>
 <mat-menu #menu="matMenu">
-  <a routerLink="/kunden/suche" mat-menu-item>Suche</a>
+  <a routerLink="/kunden/suche" mat-menu-item
+    ><i class="material-icons">search</i>Suche</a
+  >
   <button mat-menu-item><swe-login-logout></swe-login-logout></button>
 </mat-menu>
