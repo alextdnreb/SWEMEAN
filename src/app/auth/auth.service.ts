@@ -20,7 +20,7 @@ import { CookieService } from './cookie.service';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-export const ROLLE_ADMIN = 'admin';
+export const ROLLE_ADMIN = 'ROLE_ADMIN';
 // Spring Security:
 // export const ROLLE_ADMIN = 'ROLE_ADMIN'
 
@@ -31,7 +31,7 @@ export class AuthService {
     // in login() und logout() wird Subject.next() aufgerufen
     private readonly _isLoggedInSubject = new Subject<boolean>();
 
-    private readonly _rollenSubject = new Subject<string>();
+    private readonly _rollenSubject = new Subject<Array<string>>();
 
     constructor(
         private readonly basicAuthService: BasicAuthService,
@@ -49,7 +49,7 @@ export class AuthService {
         console.log(
             `AuthService.login(): username=${username}, password=${password}`,
         );
-        let rollen = '';
+        let rollen: Array<string> = [];
         try {
             // this.basicAuthService.login(username, password)
             rollen = await this.basicAuthService.login(username, password);
@@ -70,7 +70,7 @@ export class AuthService {
         console.warn('AuthService.logout()');
         this.cookieService.deleteAuthorization();
         this.isLoggedInSubject.next(false);
-        this.rollenSubject.next('');
+        this.rollenSubject.next([]);
     }
 
     get isLoggedInSubject() {

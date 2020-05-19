@@ -16,6 +16,7 @@
  */
 
 import { BASE_URI, HttpStatus } from '../shared';
+
 import { CookieService } from './cookie.service';
 import { Injectable } from '@angular/core';
 
@@ -92,6 +93,6 @@ export class BasicAuthService {
             basicAuth,
             roles,
         );
-        return roles;
+        return roles.split(',');
     }
 }
