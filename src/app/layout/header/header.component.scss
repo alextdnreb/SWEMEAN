@@ -2,4 +2,6 @@
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   font-size: 12px;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }

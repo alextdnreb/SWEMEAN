@@ -1,5 +1,7 @@
 .vscode/*
 dist/*
+src/main.js
+src/preload.js
 src/main.ts
 src/polyfills.ts
 src/environments/environment*.ts

@@ -1,15 +1,13 @@
-<span
+<a
   *ngIf="notLoggedIn; else loggedIn"
-  style="cursor: pointer;"
+  class="swe-nav-link"
   (click)="openDialog()"
 >
   <i class="material-icons">perm_identity</i>
-  Login
-</span>
+</a>
 
 <ng-template #loggedIn>
-  <span (click)="onLogout()" style="cursor: pointer;">
+  <a (click)="onLogout()">
     <i class="material-icons">meeting_room</i>
-    Logout
-  </span>
+  </a>
 </ng-template>

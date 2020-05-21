@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'swe-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
+    selector: 'swe-window-controls',
+    templateUrl: './window-controls.component.html',
+    styleUrls: ['./window-controls.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-    private preloaded: any | undefined;
-
+export class WindowControlsComponent implements OnInit {
+    preloaded: any | undefined;
     constructor() {
-        console.log('HeaderComponent.constructor()');
+        console.log('WindowControls.constructor()');
     }
 
     ngOnInit() {
@@ -19,6 +18,12 @@ export class HeaderComponent implements OnInit {
                 : window.preloaded;
     }
 
+    onClose() {
+        if (this.preloaded !== undefined) {
+            this.preloaded.close();
+        }
+    }
+
     onMaximize() {
         if (this.preloaded !== undefined) {
             if (this.preloaded.isMaximized() === true) {
@@ -26,6 +31,12 @@ export class HeaderComponent implements OnInit {
             } else {
                 this.preloaded.maximize();
             }
+        }
+    }
+
+    onMinimize() {
+        if (this.preloaded !== undefined) {
+            this.preloaded.minimize();
         }
     }
 }
