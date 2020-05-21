@@ -1,17 +1,24 @@
 <div class="swe-desktop-menu">
-  <a routerLink="/">Titel</a>
-  <a routerLink="/kunden/suche"><i class="material-icons">search</i>Suche</a>
-  <swe-login-logout style="float: right;"></swe-login-logout>
-  <a routerLink="/kunden/create" *ngIf="isAdmin"
+  <a routerLink="/" class="swe-nav-link"><i class="material-icons">home</i></a>
+  <a routerLink="/kunden/create" *ngIf="isAdmin" class="swe-nav-link"
     ><i class="material-icons">person_add</i>Erstellen</a
   >
-</div>
-<button class="swe-mobile-menu" mat-button [matMenuTriggerFor]="menu">
-  <i class="material-icons">menu</i>
-</button>
-<mat-menu #menu="matMenu">
-  <a routerLink="/kunden/suche" mat-menu-item
-    ><i class="material-icons">search</i>Suche</a
+  <swe-window-controls></swe-window-controls>
+  <swe-login-logout></swe-login-logout>
+  <a routerLink="/kunden/suche" class="swe-nav-link"
+    ><i class="material-icons">search</i></a
   >
-  <button mat-menu-item><swe-login-logout></swe-login-logout></button>
-</mat-menu>
+</div>
+<div class="swe-mobile-menu">
+  <button class="swe-burger-menu" mat-button [matMenuTriggerFor]="menu">
+    <i class="material-icons">menu</i>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a routerLink="/" mat-menu-item><i class="material-icons">home</i></a>
+    <a routerLink="/kunden/suche" mat-menu-item
+      ><i class="material-icons">search</i></a
+    >
+    <span mat-menu-item><swe-login-logout></swe-login-logout></span>
+  </mat-menu>
+  <swe-window-controls></swe-window-controls>
+</div>

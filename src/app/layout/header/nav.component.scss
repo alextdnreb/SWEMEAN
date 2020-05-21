@@ -1,12 +1,12 @@
 .swe-mobile-menu {
   display: none;
-  background: transparent;
-  border: none;
 }
 
-.swe-desktop-menu a {
-  color: white;
-  padding: 0 10px;
+.swe-burger-menu {
+  background: transparent;
+  border: none;
+  -webkit-user-select: auto;
+  -webkit-app-region: no-drag;
 }
 
 @media only screen and (max-width: 600px) {
