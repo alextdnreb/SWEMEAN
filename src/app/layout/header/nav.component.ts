@@ -14,8 +14,8 @@ import { Subscription } from 'rxjs';
 })
 export class NavComponent implements OnInit, OnDestroy {
     isAdmin!: boolean;
-
     private isAdminSubscription!: Subscription;
+
     constructor(
         public dialog: MatDialog,
         private readonly authService: AuthService,
