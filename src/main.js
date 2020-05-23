@@ -33,7 +33,7 @@ app.on('ready', createWindow);
 app.on(
     'certificate-error',
     (event, webContents, url, error, certificate, callback) => {
-        if (url.includes('https://localhost')) {
+        if (url.includes('localhost')) {
             // Verification logic.
             event.preventDefault();
             callback(true);

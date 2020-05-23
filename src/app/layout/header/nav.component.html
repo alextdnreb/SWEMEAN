@@ -4,9 +4,11 @@
     ><i class="material-icons">person_add</i></a
   >
   <swe-window-controls></swe-window-controls>
-  <swe-login-logout></swe-login-logout>
+  <swe-login-logout
+    [ngStyle]="{ float: preloaded ? 'none' : 'right' }"
+  ></swe-login-logout>
   <a [matMenuTriggerFor]="diagrams" class="swe-nav-link" *ngIf="isAdmin">
-    Diagramme
+    <i class="material-icons">keyboard_arrow_down</i>
   </a>
   <mat-menu #diagrams="matMenu">
     <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
@@ -24,7 +26,16 @@
     <a routerLink="/kunden/suche" mat-menu-item
       ><i class="material-icons">search</i></a
     >
+    <span mat-menu-item [matMenuTriggerFor]="diagramme">
+      <i class="material-icons">show_chart</i>
+    </span>
+
     <span mat-menu-item><swe-login-logout></swe-login-logout></span>
+  </mat-menu>
+  <mat-menu #diagramme="matMenu">
+    <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
+    <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
+    <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
   </mat-menu>
   <swe-window-controls></swe-window-controls>
 </div>
