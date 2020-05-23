@@ -17,7 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { Adresse, Kunde, KundeServer } from './kunde';
-import { BASE_URI, KUNDEN_PATH_REST } from '../../shared';
 import {
     ChartColor,
     ChartConfiguration,
@@ -34,6 +33,7 @@ import {
     HttpParams,
 } from '@angular/common/http';
 
+import { BASE_URI } from '../../shared';
 import { DiagrammService } from '../../shared/diagramm.service';
 import { Injectable } from '@angular/core';
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Subject.ts
@@ -88,7 +88,7 @@ export class KundeService {
         private readonly httpClient: HttpClient,
         private readonly diagrammService: DiagrammService,
     ) {
-        this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH_REST}`;
+        this.baseUriKunden = `${BASE_URI}`;
         console.log(
             `KundeService.constructor(): baseUriKunde=${this.baseUriKunden}`,
         );
@@ -136,7 +136,6 @@ export class KundeService {
                 )
                 .toPromise();
         } catch (err) {
-            console.log(err);
             throw this.buildFindError(err);
         }
         const kunden = kundenServer.map(kunde => Kunde.fromServer(kunde));
