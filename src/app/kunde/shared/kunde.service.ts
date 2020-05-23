@@ -334,13 +334,13 @@ export class KundeService {
         if (email !== undefined) {
             httpParams = httpParams.set('email', email);
         }
-        if (reisen === true) {
+        if (reisen) {
             httpParams = httpParams.set('reisen', 'true');
         }
-        if (lesen === true) {
+        if (lesen) {
             httpParams = httpParams.set('lesen', 'true');
         }
-        if (sport === true) {
+        if (sport) {
             httpParams = httpParams.set('sport', 'true');
         }
         return httpParams;
@@ -367,6 +367,6 @@ export interface Suchkriterien {
     nachname?: string;
     email?: string;
     adresse?: Adresse;
-    interessen?: { reisen: boolean; lesen: boolean; sport: boolean };
+    interessen: { reisen: boolean; lesen: boolean; sport: boolean };
 }
 /* eslint-enable max-lines,no-null/no-null */
