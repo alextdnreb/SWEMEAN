@@ -18,6 +18,12 @@
  */
 import { Adresse, Kunde, KundeServer } from './kunde';
 import { BASE_URI, KUNDEN_PATH_REST } from '../../shared';
+import {
+    ChartColor,
+    ChartConfiguration,
+    ChartData,
+    ChartDataSets,
+} from 'chart.js';
 import { FindError, RemoveError, SaveError } from './errors';
 // Bereitgestellt durch HttpClientModule
 // HttpClientModule enthaelt nur Services, keine Komponenten
@@ -28,10 +34,12 @@ import {
     HttpParams,
 } from '@angular/common/http';
 
+import { DiagrammService } from '../../shared/diagramm.service';
 import { Injectable } from '@angular/core';
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Subject.ts
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Observable.ts
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // Methoden der Klasse HttpClient
 //  * get(url, options) – HTTP GET request
@@ -40,6 +48,11 @@ import { Subject } from 'rxjs';
 //  * patch(url, body, options) – HTTP PATCH request
 //  * delete(url, options) – HTTP DELETE request
 
+interface HalResponse {
+    _embedded: {
+        kundeList: Array<KundeServer>;
+    };
+}
 // Eine Service-Klasse ist eine "normale" Klasse gemaess ES 2015, die mittels
 // DI in eine Komponente injiziert werden kann, falls sie innerhalb von
 // provider: [...] bei einem Modul oder einer Komponente bereitgestellt wird.
@@ -71,7 +84,10 @@ export class KundeService {
      * @param httpClient injizierter Service HttpClient (von Angular)
      * @return void
      */
-    constructor(private readonly httpClient: HttpClient) {
+    constructor(
+        private readonly httpClient: HttpClient,
+        private readonly diagrammService: DiagrammService,
+    ) {
         this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH_REST}`;
         console.log(
             `KundeService.constructor(): baseUriKunde=${this.baseUriKunden}`,
@@ -84,7 +100,7 @@ export class KundeService {
      * @return void
      */
     set kunde(kunde: Kunde) {
-        console.log('KundeService.set buch()', kunde);
+        console.log('KundeService.set kunde()', kunde);
         this._kunde = kunde;
     }
 
@@ -108,16 +124,22 @@ export class KundeService {
         // https://xgrommx.github.io/rx-book/content/observable/observable_instance_methods/subscribe.html
         // https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/subscribe.md
 
-        let kunden;
+        let kundenServer;
         try {
-            const kundenServer = await this.httpClient
-                .get<Array<KundeServer>>(uri, { params })
+            kundenServer = await this.httpClient
+                .get<HalResponse>(uri, { params })
+                .pipe(
+                    map((result: HalResponse) => {
+                        console.log(result);
+                        return result._embedded.kundeList;
+                    }),
+                )
                 .toPromise();
-            kunden = kundenServer.map(kunde => Kunde.fromServer(kunde));
         } catch (err) {
+            console.log(err);
             throw this.buildFindError(err);
         }
-
+        const kunden = kundenServer.map(kunde => Kunde.fromServer(kunde));
         console.log('KundeService.find(): buecher=', kunden);
         return kunden;
 
@@ -132,7 +154,7 @@ export class KundeService {
      * @param id Die ID des gesuchten Buchs
      */
     async findById(id: string | undefined) {
-        console.log(`BuchService.findById(): id=${id}`);
+        console.log(`KundeService.findById(): id=${id}`);
 
         // Gibt es ein gepuffertes Buch mit der gesuchten ID und Versionsnr.?
         if (
@@ -176,11 +198,11 @@ export class KundeService {
     }
 
     /**
-     * Ein neues Buch anlegen
-     * @param neuesBuch Das JSON-Objekt mit dem neuen Buch
+     * Einen neuen Kunden anlegen
+     * @param kunde Das JSON-Objekt mit dem neuen Kunden
      */
     async save(kunde: Kunde) {
-        console.log('KundeService.save(): buch=', kunde);
+        console.log('KundeService.save(): kunde=', kunde);
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -208,8 +230,8 @@ export class KundeService {
     }
 
     /**
-     * Ein vorhandenes Buch aktualisieren
-     * @param buch Das JSON-Objekt mit den aktualisierten Buchdaten
+     * Ein vorhandenen Kunden aktualisieren
+     * @param kunde Das JSON-Objekt mit den aktualisierten Kundendaten
      * @param successFn Die Callback-Function fuer den Erfolgsfall
      * @param errorFn Die Callback-Function fuer den Fehlerfall
      */
@@ -221,7 +243,7 @@ export class KundeService {
             errors: { [s: string]: unknown } | undefined,
         ) => void,
     ) {
-        console.log('KundeService.update(): buch=', kunde);
+        console.log('KundeService.update(): kunde=', kunde);
 
         const { version } = kunde;
         if (version === undefined) {
@@ -269,11 +291,11 @@ export class KundeService {
     }
 
     /**
-     * Ein Buch l&ouml;schen
-     * @param buch Das JSON-Objekt mit dem zu loeschenden Buch
+     * Ein Kunde l&ouml;schen
+     * @param kunde Das JSON-Objekt mit dem zu loeschenden Kunde
      */
     async remove(kunde: Kunde) {
-        console.log('KundeService.remove(): buch=', kunde);
+        console.log('KundeService.remove(): kunde=', kunde);
         const uri = `${this.baseUriKunden}/${kunde._id}`;
 
         try {
@@ -282,6 +304,88 @@ export class KundeService {
             console.log('KundeService.remove(): err=', err);
             throw new RemoveError(err.status);
         }
+    }
+
+    async createPieChart(chartElement: HTMLCanvasElement) {
+        console.log('KundeService.createPieChart()');
+        const kunden = await this.find();
+        const kundenGueltig = kunden.filter(
+            k => k._id !== undefined && k.kategorie !== undefined,
+        );
+
+        const labels = kundenGueltig
+            .map(k => k._id)
+            .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
+        console.log('KundeService.createPieChart(): labels:', labels);
+
+        const kategorien = kundenGueltig.map(k => k.kategorie);
+        const backgroundColor: Array<ChartColor> = [];
+        const hoverBackgroundColor: Array<ChartColor> = [];
+        for (let i = 0; i < kategorien.length; i++) {
+            backgroundColor.push(this.diagrammService.getBackgroundColor(i));
+            hoverBackgroundColor.push(
+                this.diagrammService.getHoverBackgroundColor(i),
+            );
+        }
+
+        const data: ChartData = {
+            labels,
+            datasets: [
+                {
+                    data: kategorien,
+                    backgroundColor,
+                    hoverBackgroundColor,
+                },
+            ],
+        };
+
+        const config: ChartConfiguration = { type: 'pie', data };
+        this.diagrammService.createChart(chartElement, config);
+    }
+
+    async createBarChart(chartElement: HTMLCanvasElement) {
+        console.log('KundeService.createBarChart()');
+        const kunden = await this.find();
+
+        const kundenGueltig = kunden.filter(
+            k => k._id !== undefined && k.kategorie !== undefined,
+        );
+
+        const labels = kundenGueltig
+            .map(k => k._id)
+            .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
+        console.log('KundeService.createBarChart(): labels:', labels);
+
+        const data = kundenGueltig.map(k => k.kategorie);
+        const datasets: Array<ChartDataSets> = [{ label: 'Kategorie', data }];
+
+        const config: ChartConfiguration = {
+            type: 'bar',
+            data: { labels, datasets },
+        };
+        return this.diagrammService.createChart(chartElement, config);
+    }
+
+    async createLinearChart(chartElement: HTMLCanvasElement) {
+        console.log('KundeService.createLinearChart()');
+        const kunden = await this.find();
+        const kundenGueltig = kunden.filter(
+            k => k._id !== undefined && k.kategorie !== undefined,
+        );
+
+        const labels = kundenGueltig
+            .map(k => k._id)
+            .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
+        console.log('KundeService.createLinearChart(): labels:', labels);
+
+        const data = kundenGueltig.map(k => k.kategorie);
+        const datasets: Array<ChartDataSets> = [{ label: 'Kategorie', data }];
+
+        const config: ChartConfiguration = {
+            type: 'line',
+            data: { labels, datasets },
+        };
+        return this.diagrammService.createChart(chartElement, config);
     }
 
     // http://www.sitepoint.com/15-best-javascript-charting-libraries
@@ -315,7 +419,7 @@ export class KundeService {
         suchkriterien: Suchkriterien | undefined,
     ): HttpParams {
         console.log(
-            'BuchService.suchkriterienToHttpParams(): suchkriterien=',
+            'KundeService.suchkriterienToHttpParams(): suchkriterien=',
             suchkriterien,
         );
         let httpParams = new HttpParams();
@@ -356,7 +460,7 @@ export class KundeService {
 
         const { status, error }: { status: number; error: string } = err;
         console.log(
-            `BuchService.buildFindError(): status=${status}, Response-Body=${error}`,
+            `KundeService.buildFindError(): status=${status}, Response-Body=${error}`,
         );
         return new FindError(status, error, err);
     }

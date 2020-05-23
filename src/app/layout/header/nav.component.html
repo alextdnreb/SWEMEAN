@@ -1,10 +1,18 @@
 <div class="swe-desktop-menu">
   <a routerLink="/" class="swe-nav-link"><i class="material-icons">home</i></a>
   <a routerLink="/kunden/create" *ngIf="isAdmin" class="swe-nav-link"
-    ><i class="material-icons">person_add</i>Erstellen</a
+    ><i class="material-icons">person_add</i></a
   >
   <swe-window-controls></swe-window-controls>
   <swe-login-logout></swe-login-logout>
+  <a [matMenuTriggerFor]="diagrams" class="swe-nav-link" *ngIf="isAdmin">
+    Diagramme
+  </a>
+  <mat-menu #diagrams="matMenu">
+    <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
+    <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
+    <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
+  </mat-menu>
   <swe-nav-search></swe-nav-search>
 </div>
 <div class="swe-mobile-menu">
