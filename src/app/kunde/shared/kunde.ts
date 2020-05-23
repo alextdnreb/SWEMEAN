@@ -43,6 +43,8 @@ export interface Umsatz {
 export interface KundeServer extends KundeShared {
     interessen?: Array<string>;
     kategorie?: number;
+    user?: string | null;
+    username?: string | null;
     _links?: {
         self: Link;
         list?: Link;
@@ -60,21 +62,21 @@ export interface KundeForm extends KundeShared {
 }
 
 export enum Geschlecht {
-    MAENNLICH = 'MAENNLICH',
-    WEIBLICH = 'WEIBLICH',
-    DIVERS = 'DIVERS',
+    M = 'MAENNLICH',
+    W = 'WEIBLICH',
+    D = 'DIVERS',
 }
 
 export enum Familienstand {
-    LEDIG = 'LEDIG',
-    VERHEIRATET = 'VERHEIRATET',
-    GESCHIEDEN = 'GESCHIEDEN',
-    VERWITWET = 'VERWITWET',
+    L = 'LEDIG',
+    VH = 'VERHEIRATET',
+    G = 'GESCHIEDEN',
+    VW = 'VERWITWET',
 }
 
 export interface Adresse {
-    ort: string;
     plz: string;
+    ort: string;
 }
 
 export class Kunde {
