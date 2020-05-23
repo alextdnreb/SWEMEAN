@@ -1,0 +1,13 @@
+<div class="row mt-2">
+  <label class="col col-1"> Bewertung </label>
+  <div class="col col-11" *ngIf="ratingArray">
+    <span *ngFor="let r of ratingArray">
+      <i
+        class="material-icons"
+        style="color: yellow; font-weight: bold;"
+        *ngIf="r"
+        >star</i
+      >
+    </span>
+  </div>
+</div>

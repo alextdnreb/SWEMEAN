@@ -1,0 +1,15 @@
+<div class="row mt-2">
+  <label class="col col-1"> Stammkunde </label>
+  <div class="col col-11">
+    <input
+      type="checkbox"
+      checked
+      disabled
+      class="checkbox"
+      *ngIf="stammkunde; else nichtStammkunde"
+    />
+    <ng-template #nichtStammkunde>
+      <input type="checkbox" disabled class="checkbox" />
+    </ng-template>
+  </div>
+</div>

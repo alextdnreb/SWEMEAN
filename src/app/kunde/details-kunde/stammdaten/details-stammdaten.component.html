@@ -1,0 +1,9 @@
+<div *ngIf="kunde">
+  <swe-details-titel [titel]="kunde.titel"></swe-details-titel>
+  <swe-details-bewertung [ratingArray]="kunde.ratingArray"></swe-details-bewertung>
+  <swe-details-art [art]="kunde.art"></swe-details-art>
+  <swe-details-datum [formatted]="kunde.datumFormatted"></swe-details-datum>
+  <swe-details-skonto [skonto]="kunde.skonto"></swe-details-skonto>
+  <swe-details-stammkunde [stammkunde]="kunde.lieferbar"></swe-details-stammkunde>
+  <swe-details-kundennummer [kundennummer]="kunde.kundennummer"></swe-details-kundennummer>
+</div>
