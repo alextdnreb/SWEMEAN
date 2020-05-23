@@ -1,0 +1,11 @@
+<form (submit)="onFind()" role="form">
+  <input
+    type="text"
+    placeholder="Nach Titel suchen"
+    id="swe-navbar-search"
+    [{NgModel}]="nachname"
+  />
+  <a routerLink="/kunden/suche" class="swe-nav-link"
+    ><i class="material-icons">search</i></a
+  >
+</form>
