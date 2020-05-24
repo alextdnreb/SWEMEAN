@@ -18,7 +18,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'hs-waiting',
+    selector: 'swe-waiting',
     templateUrl: './waiting.component.html',
 })
 export class WaitingComponent {

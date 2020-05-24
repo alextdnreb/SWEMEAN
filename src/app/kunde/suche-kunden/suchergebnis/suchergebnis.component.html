@@ -23,8 +23,8 @@
     <mat-card-content>
       <mat-card-title>Suchergebnis</mat-card-title>
       <mat-card-subtitle>f&uuml;r Kunden</mat-card-subtitle>
-      
-      <hs-waiting *ngIf="waiting; else suchergebnis"></hs-waiting>
+
+      <swe-waiting *ngIf="waiting; else suchergebnis"></swe-waiting>
 
       <ng-template #suchergebnis>
         <div
@@ -72,9 +72,15 @@
                   <td>
                     <span *ngFor="let sw of k.interessen">
                       <span [ngSwitch]="sw">
-                        <span *ngSwitchCase="'R'"> <button mat-stroked-button>Reisen</button><br /> </span>
-                        <span *ngSwitchCase="'L'"> <button mat-stroked-button>Lesen</button> </span>
-                        <span *ngSwitchCase="'S'"> <button mat-stroked-button>Sport</button> </span>
+                        <span *ngSwitchCase="'R'">
+                          <button mat-stroked-button>Reisen</button><br />
+                        </span>
+                        <span *ngSwitchCase="'L'">
+                          <button mat-stroked-button>Lesen</button>
+                        </span>
+                        <span *ngSwitchCase="'S'">
+                          <button mat-stroked-button>Sport</button>
+                        </span>
                       </span>
                     </span>
                   </td>
@@ -102,14 +108,18 @@
               <i class="material-icons">info</i>
               <span class="ml-1" [ngPlural]="kunden.length">
                 <!-- zu vergleichender Ausdruck -->
-                <ng-template ngPluralCase="=0"> Es gibt kein Kunden </ng-template>
-                <ng-template ngPluralCase="=1"> Es gibt ein Kunden </ng-template>
+                <ng-template ngPluralCase="=0">
+                  Es gibt kein Kunden
+                </ng-template>
+                <ng-template ngPluralCase="=1">
+                  Es gibt ein Kunden
+                </ng-template>
                 <ng-template ngPluralCase="other">
                   Es gibt {{ kunden.length }} Kunden
                 </ng-template>
               </span>
             </div>
-    
+
             <div>
               <i class="material-icons">info</i>
               <span class="ml-1">
@@ -119,15 +129,14 @@
             </div>
           </div>
         </div>
-    
+
         <!-- Ausgabe im Webbrowser statt console.log(...) -->
         <!-- <pre>{{buecher | json}}</pre> -->
-    
+
         <ng-template #showErrorMsg>
-          <hs-error-message [text]="errorMsg"></hs-error-message>
+          <swe-error-message [text]="errorMsg"></swe-error-message>
         </ng-template>
       </ng-template>
-
-    </mat-card-content> 
+    </mat-card-content>
   </mat-card>
 </section>

@@ -14,29 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable max-classes-per-file */
 
 // Bereitgestellt durch das RouterModule
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 import { Component } from '@angular/core';
-import { easeIn } from '../../../shared/animations';
-import { easeOut } from '../../../shared/animations';
 import { FindError } from '../../shared';
 import { HttpStatus } from '../../../shared';
 import { Input } from '@angular/core';
 import { Kunde } from '../../shared';
 import { KundeService } from '../../shared';
-import type {
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    SimpleChanges,
-} from '@angular/core';
 import { NgLocalization } from '@angular/common';
-import { Subscription } from 'rxjs';
+import type { OnChanges } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import type { RemoveError } from '../../shared';
+import type { SimpleChanges } from '@angular/core';
 import type { Suchkriterien } from '../../shared/kunde.service';
+import { easeIn } from '../../../shared/animations';
+import { easeOut } from '../../../shared/animations';
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-suchergebnis</code>, um zun&auml;chst
@@ -48,7 +45,7 @@ import type { Suchkriterien } from '../../shared/kunde.service';
     templateUrl: './suchergebnis.component.html',
     animations: [easeIn, easeOut],
 })
-export class SuchergebnisComponent implements OnChanges, OnInit, OnDestroy {
+export class SuchergebnisComponent implements OnChanges, OnInit {
     // Im ganzen Beispiel: lokale Speicherung des Zustands und nicht durch z.B.
     // eine Flux-Bibliothek, wie z.B. Redux http://redux.js.org
 
@@ -62,10 +59,6 @@ export class SuchergebnisComponent implements OnChanges, OnInit, OnDestroy {
     kunden: Array<Kunde> = [];
     errorMsg: string | undefined;
     isAdmin!: boolean;
-
-    private kundenSubscription!: Subscription;
-    private errorSubscription!: Subscription;
-    private removeDescription: Subscription | undefined;
 
     // Empfehlung: Konstruktor nur fuer DI
     // eslint-disable-next-line max-params
@@ -108,19 +101,50 @@ export class SuchergebnisComponent implements OnChanges, OnInit, OnDestroy {
     // IntelliSense bei der Verwendung von TypeScript.
     ngOnInit() {
         console.log('SuchergebnisComponent.ngOnInit()');
-        this.kundenSubscription = this.subscribeKunden();
-        this.errorSubscription = this.subscribeError();
         this.isAdmin = this.authService.isAdmin;
     }
 
-    ngOnDestroy() {
-        console.log('SuchergebnisComponent.ngOnDestroy()');
-        this.kundenSubscription.unsubscribe();
-        this.errorSubscription.unsubscribe();
+    /**
+     * Das ausgew&auml;hlte bzw. angeklickte Kunde in der Detailsseite anzeigen.
+     * @param kunde Das ausgew&auml;hlte Kunde
+     */
+    onClick(kunde: Kunde) {
+        console.log('SuchergebnisComponent.onClick(): buch=', kunde);
+        // Puffern im Singleton, um nicht erneut zu suchen
+        this.kundeService.kunde = kunde;
+        return this.router.navigate(['..', kunde._id], {
+            relativeTo: this.route,
+        });
+    }
 
-        if (this.removeDescription !== undefined) {
-            this.removeDescription.unsubscribe();
+    /**
+     * Das ausgew&auml;hlte bzw. angeklickte Kunde l&ouml;schen.
+     * @param kunde Das ausgew&auml;hlte Kunde
+     */
+    async onRemove(kunde: Kunde) {
+        console.log('SuchergebnisComponent.onRemove(): kunde=', kunde);
+
+        try {
+            await this.kundeService.remove(kunde);
+        } catch (err) {
+            this.handleRemoveError(err);
+            return;
         }
+
+        if (this.kunden.length > 0) {
+            this.kunden = this.kunden.filter((k: Kunde) => k._id !== kunde._id);
+        }
+    }
+
+    private handleRemoveError(err: RemoveError) {
+        console.error(
+            `SuchergebnisComponent.onRemove(): statuscode=${err.statuscode}`,
+        );
+        this.reset();
+        this.errorMsg = 'Fehler beim entfernen des Kunden.';
+        console.log(
+            `SuchErgebnisComponent.handleRemoveError(): errorMsg=${this.errorMsg}`,
+        );
     }
 
     private handleFindError(err: FindError) {
@@ -152,107 +176,6 @@ export class SuchergebnisComponent implements OnChanges, OnInit, OnDestroy {
         );
     }
 
-    /**
-     * Das ausgew&auml;hlte bzw. angeklickte Kunde in der Detailsseite anzeigen.
-     * @param kunde Das ausgew&auml;hlte Kunde
-     */
-    onClick(kunde: Kunde) {
-        console.log('SuchergebnisComponent.onSelect(): Kunde=', kunde);
-        // Puffern im Singleton, um nicht erneut zu suchen
-        this.kundeService.kunde = kunde;
-        // TODO: NavigationExtras beim Routing
-        // https://github.com/angular/angular/pull/27198
-        // https://github.com/angular/angular/commit/67f4a5d4bd3e8e6a35d85500d630d94db061900b
-        /* eslint-disable object-curly-newline */
-        return this.router.navigate(['..', kunde._id], {
-            relativeTo: this.route,
-        });
-    }
-
-    /**
-     * Das ausgew&auml;hlte bzw. angeklickte Kunde l&ouml;schen.
-     * @param kunde Das ausgew&auml;hlte Kunde
-     */
-    async onRemove(kunde: Kunde) {
-        console.log('SuchergebnisComponent.onRemove(): buch=', kunde);
-        await this.kundeService
-            .remove(kunde)
-            .catch(err => console.log(err))
-            .then(() => console.log('Remove succeed'));
-        if (this.kunden.length > 0) {
-            this.kunden = this.kunden.filter((k: Kunde) => k._id !== kunde._id);
-        }
-    }
-
-    /**
-     * Methode, um den injizierten <code>BuchService</code> zu beobachten,
-     * ob es gefundene bzw. darzustellende B&uuml;cher gibt, die in der
-     * Kindkomponente f&uuml;r das Tag <code>gefundene-buecher</code>
-     * dargestellt werden. Diese private Methode wird in der Methode
-     * <code>ngOnInit</code> aufgerufen.
-     */
-    private subscribeKunden() {
-        console.log('SuchergebnisComponent.subscribeKunden()');
-        const next = (kunden: Array<Kunde>) => {
-            this.reset();
-            this.errorMsg = undefined;
-
-            this.kunden = kunden;
-            console.log(
-                'SuchErgebnisComponent.subscribeKunden: this.kunden=',
-                this.kunden,
-            );
-        };
-
-        // Observable.subscribe() aus RxJS liefert ein Subscription Objekt,
-        // mit dem man den Request auch abbrechen ("cancel") kann
-        // https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/subscribe.md
-        // http://stackoverflow.com/questions/34533197/what-is-the-difference-between-rx-observable-subscribe-and-foreach
-        // https://xgrommx.github.io/rx-book/content/observable/observable_instance_methods/subscribe.html
-        // Funktion als Funktionsargument, d.h. Code als Daten uebergeben
-        return this.kundeService.kundenSubject.subscribe(next);
-    }
-
-    /**
-     * Methode, um den injizierten <code>BuchService</code> zu beobachten,
-     * ob es bei der Suche Fehler gibt, die in der Kindkomponente f&uuml;r das
-     * Tag <code>error-message</code> dargestellt werden. Diese private Methode
-     * wird in der Methode <code>ngOnInit</code> aufgerufen.
-     */
-    private subscribeError() {
-        const next = (err: string | number | undefined) => {
-            this.reset();
-            this.kunden = [];
-
-            console.log('SuchErgebnisComponent.subscribeError: err=', err);
-            if (err === undefined) {
-                this.errorMsg = 'Ein Fehler ist aufgetreten.';
-                return;
-            }
-
-            if (typeof err === 'string') {
-                this.errorMsg = err;
-                return;
-            }
-
-            switch (err) {
-                case HttpStatus.NOT_FOUND:
-                    this.errorMsg = 'Keine Kunden gefunden.';
-                    break;
-                case HttpStatus.TOO_MANY_REQUESTS:
-                    this.errorMsg =
-                        'Zu viele Anfragen. Bitte versuchen Sie es später noch einmal.';
-                    break;
-                default:
-                    this.errorMsg = 'Ein Fehler ist aufgetreten.';
-                    break;
-            }
-            console.log(`SuchErgebnisComponent.errorMsg: ${this.errorMsg}`);
-        };
-
-        return this.kundeService.errorSubject.subscribe(next);
-    }
-
     private reset() {
         this.suchkriterien = {
             nachname: '',
@@ -267,6 +190,6 @@ export class SuchergebnisComponent implements OnChanges, OnInit, OnDestroy {
 
 export class AnzahlLocalization extends NgLocalization {
     getPluralCategory(count: number) {
-        return count === 1 ? 'single' : 'multi'; 
+        return count === 1 ? 'single' : 'multi';
     }
 }
