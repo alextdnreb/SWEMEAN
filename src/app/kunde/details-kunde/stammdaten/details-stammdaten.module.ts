@@ -1,28 +1,24 @@
-
 import { CommonModule } from '@angular/common';
-import { DetailsBewertungModule } from './details-bewertung.module';
-import { DetailsDatumModule } from './details-datum.module';
-import { DetailsKundennummerModule } from './details-kundennummer.module';
-import { DetailsNameModule } from './details-name.module';
-import { DetailsSkontoModule } from './details-skonto.module';
+import { DetailsEmailModule } from './details-email.module';
+import { DetailsGeburtsdatumModule } from './details-geburtsdatum.module';
+import { DetailsGeschlechtModule } from './details-geschlecht.module';
+import { DetailsNachnameModule } from './details-nachname.module';
 import { DetailsStammdatenComponent } from './details-stammdaten.component';
 import { DetailsStammkundeModule } from './details-stammkunde.module';
-import { DetailsTitelModule } from './details-titel.module';
+import { DetailsUmsatzModule } from './details-umsatz.module';
 import { NgModule } from '@angular/core';
-
 
 @NgModule({
     declarations: [DetailsStammdatenComponent],
     exports: [DetailsStammdatenComponent],
     imports: [
         CommonModule,
-        DetailsBewertungModule,
-        DetailsDatumModule,
-        DetailsKundennummerModule,
+        DetailsGeburtsdatumModule,
+        DetailsNachnameModule,
         DetailsStammkundeModule,
-        DetailsSkontoModule,
-        DetailsTitelModule,
-        DetailsNameModule,
+        DetailsUmsatzModule,
+        DetailsGeschlechtModule,
+        DetailsEmailModule,
     ],
 })
 export class DetailsStammdatenModule {}

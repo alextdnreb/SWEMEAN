@@ -1,0 +1,11 @@
+<div [ngSwitch]="Geschlecht">
+  <div *ngSwitchCase="M">
+    Maennlich
+    </div>
+  <div *ngSwitchCase="W">
+    Weiblich
+    </div>
+  <div *ngSwitchCase="D">Divers
+        </div>
+</div>
+<button (click)="toggleValue()">Toggle Value</button>

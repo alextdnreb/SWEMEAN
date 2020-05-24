@@ -1,7 +1,7 @@
-<hs-waiting *ngIf="waiting; else details"></hs-waiting>
+<swe-waiting *ngIf="waiting; else details"></swe-waiting>
 
 <ng-template #details>
-  <hs-details-breadcrumbs></hs-details-breadcrumbs>
+  <swe-details-breadcrumbs></swe-details-breadcrumbs>
 
   <section class="mt-1" *ngIf="kunde; else showErrorMsg">
     <h4>Kunde {{ kunde._id }}:</h4>
@@ -22,19 +22,6 @@
           Stammdaten
         </a>
       </li>
-      <li class="nav-item" *ngIf="kunde.hasSchlagwoerter()">
-        <a
-          class="nav-link"
-          id="schlagwoerter-tab"
-          href="#schlagwoerter"
-          data-toggle="tab"
-          role="tab"
-          aria-controls="schlagwoerter"
-          aria-expanded="true"
-        >
-          Schlagw&ouml;rter
-        </a>
-      </li>
     </ul>
 
     <div class="tab-content" id="kundeContent">
@@ -45,29 +32,15 @@
         aria-labelledby="stammdaten-tab"
       >
         <div class="mt-2">
-          <hs-details-stammdaten [kunde]="kunde"> </hs-details-stammdaten>
+          <swe-details-stammdaten [kunde]="kunde"> </swe-details-stammdaten>
         </div>
       </div>
 
-      <div
-        class="tab-pane fade"
-        id="schlagwoerter"
-        role="tabpanel"
-        aria-labelledby="schlagwoerter-tab"
-        *ngIf="kunde.hasSchlagwoerter()"
-      >
-        <div class="mt-2">
-          <hs-details-schlagwoerter [values]="kunde.schlagwoerter">
-          </hs-details-schlagwoerter>
-        </div>
-      </div>
-    </div>
-
-    <hs-details-bearbeiten [id]="kunde._id" *ngIf="isAdmin">
-    </hs-details-bearbeiten>
+    <swe-details-bearbeiten [id]="kunde._id" *ngIf="isAdmin">
+    </swe-details-bearbeiten>
   </section>
 
   <ng-template #showErrorMsg>
-    <hs-error-message [text]="errorMsg"></hs-error-message>
+    <swe-error-message [text]="errorMsg"></swe-error-message>
   </ng-template>
 </ng-template>

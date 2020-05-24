@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { DetailsBearbeitenModule } from './details-bearbeiten.module';
 import { DetailsBreadcrumbsModule } from './details-breadcrumbs.module';
-import { DetailsSchlagwoerterModule } from './schlagwoerter/details-schlagwoerter.module';
 import { DetailsStammdatenModule } from './stammdaten/details-stammdaten.module';
 import { ErrorMessageModule } from '../../shared/error-message.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +20,6 @@ import { WaitingModule } from '../../shared/waiting.module';
         WaitingModule,
         DetailsBearbeitenModule,
         DetailsBreadcrumbsModule,
-        DetailsSchlagwoerterModule,
         DetailsStammdatenModule,
     ],
 })
