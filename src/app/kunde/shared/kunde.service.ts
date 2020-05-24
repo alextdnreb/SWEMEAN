@@ -444,14 +444,18 @@ export class KundeService {
         if (email !== undefined) {
             httpParams = httpParams.set('email', email);
         }
-        if (reisen) {
-            httpParams = httpParams.set('reisen', 'true');
-        }
-        if (lesen) {
-            httpParams = httpParams.set('lesen', 'true');
-        }
-        if (sport) {
-            httpParams = httpParams.set('sport', 'true');
+        if (reisen || lesen || sport) {
+            let httpInteressen = '';
+            if (reisen) {
+                httpInteressen += 'R,';
+            }
+            if (lesen) {
+                httpInteressen += 'L,';
+            }
+            if (sport) {
+                httpInteressen += 'S,';
+            }
+            httpParams = httpParams.set('interessen', httpInteressen);
         }
         return httpParams;
     }
