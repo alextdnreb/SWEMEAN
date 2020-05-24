@@ -84,6 +84,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
             this.kunden = await this.kundeService.find(this.suchkriterien);
         } catch (err) {
             this.handleFindError(err);
+            this.kunden = [];
             return;
         } finally {
             this.waiting = false;
