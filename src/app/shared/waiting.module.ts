@@ -15,14 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* eslint-disable @typescript-eslint/no-magic-numbers */
+import { NgModule } from '@angular/core';
+import { WaitingComponent } from './waiting.component';
 
-export enum HttpStatus {
-    OK = 200,
-    BAD_REQUEST = 400,
-    NOT_FOUND = 404,
-    TOO_MANY_REQUESTS = 429,
-    GATEWAY_TIMEOUT = 504,
-}
-
-/* eslint-enable @typescript-eslint/no-magic-numbers */
+@NgModule({
+    declarations: [WaitingComponent],
+    exports: [WaitingComponent],
+})
+export class WaitingModule {}
