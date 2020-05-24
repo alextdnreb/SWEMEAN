@@ -38,7 +38,7 @@ import { easeOut } from '../../../shared/animations';
 /**
  * Komponente f&uuml;r das Tag <code>hs-suchergebnis</code>, um zun&auml;chst
  * das Warten und danach das Ergebnis der Suche anzuzeigen, d.h. die gefundenen
- * B&uuml;cher oder eine Fehlermeldung.
+ * Kunden oder eine Fehlermeldung.
  */
 @Component({
     selector: 'swe-suchergebnis',
@@ -79,8 +79,8 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
 
         this.waiting = true;
         console.log('SuchergebnisComponent.ngOnChange(): run find()');
-
         try {
+            // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
             this.kunden = await this.kundeService.find(this.suchkriterien);
         } catch (err) {
             this.handleFindError(err);
@@ -112,9 +112,9 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         console.log('SuchergebnisComponent.onClick(): buch=', kunde);
         // Puffern im Singleton, um nicht erneut zu suchen
         this.kundeService.kunde = kunde;
-        return this.router.navigate(['..', kunde._id], {
-            relativeTo: this.route,
-        });
+
+        // eslint-disable-next-line prettier/prettier
+        return this.router.navigate(['..', kunde._id], {relativeTo: this.route});
     }
 
     /**
