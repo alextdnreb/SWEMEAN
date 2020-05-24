@@ -127,17 +127,24 @@ export class KundeService {
         let kundenServer;
         try {
             kundenServer = await this.httpClient
-                .get<HalResponse>(uri, { params })
+                .get<HalResponse | KundeServer>(uri, { params })
                 .pipe(
-                    map((result: HalResponse) => {
-                        console.log(result);
-                        return result._embedded.kundeList;
+                    map((result: HalResponse | KundeServer) => {
+                        console.log('KundeService.find(): result=', result);
+                        if (Object.keys(result).includes('_embedded')) {
+                            // eslint-disable-next-line no-extra-parens
+                            return (result as HalResponse)._embedded.kundeList;
+                        }
+                        return [result as KundeServer];
                     }),
                 )
                 .toPromise();
         } catch (err) {
+            console.log(err);
             throw this.buildFindError(err);
         }
+        console.log('KundeService.find(): Map data');
+
         const kunden = kundenServer.map(kunde => Kunde.fromServer(kunde));
         console.log('KundeService.find(): buecher=', kunden);
         return kunden;

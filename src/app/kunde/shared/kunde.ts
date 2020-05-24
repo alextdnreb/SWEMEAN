@@ -117,6 +117,7 @@ export class Kunde {
      * @return Das initialisierte Buch-Objekt
      */
     static fromServer(kundeServer: KundeServer, etag?: string) {
+        console.log('Kunde.fromServer(): begin');
         let selfLink: string | undefined;
         const { _links } = kundeServer;
         if (_links !== undefined) {
