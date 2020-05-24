@@ -72,9 +72,9 @@
                   <td>
                     <span *ngFor="let sw of k.interessen">
                       <span [ngSwitch]="sw">
-                        <span *ngSwitchCase="'REISEN'"> reisen<br /> </span>
-                        <span *ngSwitchCase="'LESEN'"> lesen </span>
-                        <span *ngSwitchCase="'SPORT'"> sport </span>
+                        <span *ngSwitchCase="'R'"> <button mat-stroked-button>Reisen</button><br /> </span>
+                        <span *ngSwitchCase="'L'"> <button mat-stroked-button>Lesen</button> </span>
+                        <span *ngSwitchCase="'S'"> <button mat-stroked-button>Sport</button> </span>
                       </span>
                     </span>
                   </td>
