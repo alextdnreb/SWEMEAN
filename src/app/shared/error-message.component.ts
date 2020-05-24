@@ -22,7 +22,7 @@ import { Component, Input } from '@angular/core';
  * &lt;hs-error-message [text]="..."&gt;
  */
 @Component({
-    selector: 'hs-error-message',
+    selector: 'swe-error-message',
     templateUrl: './error-message.component.html',
 })
 export class ErrorMessageComponent {

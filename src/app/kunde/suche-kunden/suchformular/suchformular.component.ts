@@ -78,15 +78,12 @@ export class SuchformularComponent {
         if (email.length === 0) {
             this.suchkriterien.next({
                 nachname,
-                //email,
-                //adresse,
                 interessen: { reisen, lesen, sport },
             });
         } else {
             this.suchkriterien.next({
                 nachname,
                 email,
-                //adresse,
                 interessen: { reisen, lesen, sport },
             });
         }
