@@ -15,19 +15,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<div class="form-group row">
-  <label for="titelInput" class="col col-2 form-control-label"> E-Mail </label>
-  <div class="col col-10">
-    <mat-form-field>
-      <mat-label>E-Mail</mat-label>
-      <input
-        matInput
-        id="emailInput"
-        placeholder="Die E-Mail oder einen Teil davon eingeben"
-        class="form-control"
-        [(ngModel)]="email"
-        name="email"
-      />
-    </mat-form-field>
-  </div>
+<div>
+  <mat-form-field>
+    <mat-label>E-Mail</mat-label>
+    <input
+      matInput
+      id="emailInput"
+      placeholder="Gültige E-Mail Adresse eingeben"
+      [(ngModel)]="email"
+      name="email"
+    />
+  </mat-form-field>
 </div>

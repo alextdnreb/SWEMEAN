@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SuchergebnisComponent } from './suchergebnis.component';
@@ -38,6 +39,7 @@ import { WaitingModule } from '../../../shared/waiting.module';
         MatDialogModule,
         MatInputModule,
         WaitingModule,
+        MatTableModule,
     ],
 })
 export class SuchergebnisModule {}

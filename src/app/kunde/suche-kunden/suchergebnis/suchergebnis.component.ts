@@ -43,6 +43,7 @@ import { easeOut } from '../../../shared/animations';
 @Component({
     selector: 'swe-suchergebnis',
     templateUrl: './suchergebnis.component.html',
+    styleUrls: ['suchergebnis.component.scss'],
     animations: [easeIn, easeOut],
 })
 export class SuchergebnisComponent implements OnChanges, OnInit {
@@ -53,6 +54,16 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
     // Decorator fuer ein Attribut. Siehe InputMetadata
     @Input()
     suchkriterien: Suchkriterien | undefined;
+
+    displayedColumns: Array<string> = [
+        'position',
+        'ID',
+        'nachname',
+        'email',
+        'interessen',
+        'details',
+        'loeschen',
+    ];
 
     waiting = false;
 
@@ -114,8 +125,32 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         // Puffern im Singleton, um nicht erneut zu suchen
         this.kundeService.kunde = kunde;
 
-        // eslint-disable-next-line prettier/prettier
-        return this.router.navigate(['..', kunde._id], {relativeTo: this.route});
+        /* eslint-disable object-curly-newline */
+        return this.router.navigate(['..', kunde._id], {
+            relativeTo: this.route,
+        });
+        /* eslint-enable object-curly-newline */
+    }
+
+    mapInteressen(interessen: Array<string>) {
+        /* eslint-disable-next-line no-null/no-null */
+        if (interessen === null || interessen.length === 0) {
+            return '';
+        }
+        return interessen
+            .map(interesse => {
+                switch (interesse) {
+                    case 'R':
+                        return 'Reisen';
+                    case 'L':
+                        return 'Lesen';
+                    case 'S':
+                        return 'Sport';
+                    default:
+                        return '';
+                }
+            })
+            .join(', ');
     }
 
     /**
