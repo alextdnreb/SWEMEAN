@@ -91,26 +91,16 @@ export class SuchformularComponent {
         );
 
         console.log('SuchformularComponent.onFind(): do');
-        if (email.length === 0) {
-            this.suchkriterien.next({
-                nachname,
-                interessen: { reisen, lesen, sport },
-                kategorie,
-                ort,
-                plz,
-                geschlecht,
-            });
-        } else {
-            this.suchkriterien.next({
-                nachname,
-                email,
-                interessen: { reisen, lesen, sport },
-                kategorie,
-                ort,
-                plz,
-                geschlecht,
-            });
-        }
+
+        this.suchkriterien.next({
+            nachname,
+            email,
+            interessen: { reisen, lesen, sport },
+            kategorie,
+            ort,
+            plz,
+            geschlecht,
+        });
 
         console.log('SuchformularComponent.onFind(): done');
 

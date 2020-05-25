@@ -468,7 +468,7 @@ export class KundeService {
             httpParams = httpParams.set('geschlecht', geschlecht);
         }
 
-        if (email !== undefined) {
+        if (email !== undefined && email.length !== 0) {
             httpParams = httpParams.set('email', email);
         }
         if (reisen || lesen || sport) {
