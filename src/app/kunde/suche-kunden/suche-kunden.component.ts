@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
 import type { OnInit } from '@angular/core';
 import { Suchkriterien } from '../shared/types';
 import { Title } from '@angular/platform-browser';
+
 @Component({
     selector: 'swe-suche-kunden',
     templateUrl: './suche-kunden.component.html',
