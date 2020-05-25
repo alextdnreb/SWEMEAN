@@ -14,32 +14,31 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<div class="form-group row">
-  <label class="col col-2 form-control-label"> Interessen </label>
-  <div class="col col-10">
-    <mat-checkbox
-      type="checkbox"
-      id="reisenInput"
-      [(ngModel)]="reisen"
-      name="reisen"
-    >
-      Reisen
-    </mat-checkbox>
-    <mat-checkbox
-      type="checkbox"
-      id="lesenInput"
-      [(ngModel)]="lesen"
-      name="lesen"
-    >
-      Lesen
-    </mat-checkbox>
-    <mat-checkbox
-      type="checkbox"
-      id="sportInput"
-      [(ngModel)]="sport"
-      name="sport"
-    >
-      Sport
-    </mat-checkbox>
-  </div>
+
+<div>
+  <div>Interessen</div>
+  <mat-checkbox
+    type="checkbox"
+    id="reisenInput"
+    [(ngModel)]="reisen"
+    name="reisen"
+  >
+    Reisen
+  </mat-checkbox>
+  <mat-checkbox
+    type="checkbox"
+    id="lesenInput"
+    [(ngModel)]="lesen"
+    name="lesen"
+  >
+    Lesen
+  </mat-checkbox>
+  <mat-checkbox
+    type="checkbox"
+    id="sportInput"
+    [(ngModel)]="sport"
+    name="sport"
+  >
+    Sport
+  </mat-checkbox>
 </div>
