@@ -16,6 +16,7 @@
  */
 
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 @Component({
@@ -23,6 +24,7 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './create-kunde.component.html',
 })
 export class CreateKundeComponent implements OnInit {
+    form = new FormGroup({});
     constructor(private readonly titleService: Title) {
         console.log('CreateKundeComponent.constructor()');
     }

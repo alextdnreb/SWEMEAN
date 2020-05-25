@@ -1,1 +1,57 @@
-Ja servus, bereit zum Erstellen
+<div class="card">
+  <div class="card-header">
+    <span class="ml-1 font-weight-bold">Neuer Kunde</span>
+  </div>
+
+  <div class="card-body">
+    <!-- dynamisches Formular durch formGroup -->
+    <form [formGroup]="form" role="form">
+      <div class="form-group row has-warning mb-4" *ngIf="showWarning">
+        <div class="col col-12 form-control-feedback">
+          <span class="alert alert-warning"
+            >**
+            <i class="material-icons">warning</i>
+            <strong class="text-help ml-1">
+              Wenn Sie die Seite jetzt verlassen, verlieren Sie Ihre
+              eingegebenen Daten.
+            </strong>
+          </span>
+        </div>
+      </div>
+
+      <swe-create-nachname [form]="form"></swe-create-nachname>
+      <swe-create-adresse [form]="form"></swe-create-adresse>
+      <swe-create-email [form]="form"></swe-create-email>
+      <swe-create-interessen [form]="form"></swe-create-interessen>
+      <swe-create-umsatz [form]="form"></swe-create-umsatz>
+      <swe-create-geschlecht [form]="form"></swe-create-geschlecht>
+      <swe-create-familienstand [form]="form"></swe-create-familienstand>
+      <swe-create-homepage [form]="form"></swe-create-homepage>
+      <swe-create-kategorie [form]="form"></swe-create-kategorie>
+      <swe-create-username [form]="form"></swe-create-username>
+      <swe-create-geburtsdatum [form]="form"></swe-create-geburtsdatum>
+      <swe-create-newsletter [form]="form"></swe-create-newsletter>
+      <swe-create-plz [form]="form"></swe-create-plz>
+      <swe-create-passwort [form]="form"></swe-create-passwort>
+      <div class="form-group row">
+        <div class="col offset-2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="onSave()"
+            [disabled]="!form.valid"
+          >
+            <i class="material-icons">check</i>
+            <span class="ml-1">Jetzt anlegen</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <small>* sind Pflichtfelder</small>
+  </div>
+</div>
+
+<!-- <div class="mt-3"> -->
+<!-- <swe-error-message [text]="errorMsg"></swe-error-message> -->
+<!-- </div> -->
