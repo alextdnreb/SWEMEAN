@@ -84,6 +84,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
 
     async ngOnChanges(changes: SimpleChanges) {
         console.log('SuchergebnisComponent.ngOnChange(): do');
+        console.log(changes);
         if (changes.suchkriterien.currentValue === undefined) {
             return;
         }
@@ -221,11 +222,5 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         };
 
         this.waiting = false;
-    }
-}
-
-export class AnzahlLocalization extends NgLocalization {
-    getPluralCategory(count: number) {
-        return count === 1 ? 'single' : 'multi';
     }
 }
