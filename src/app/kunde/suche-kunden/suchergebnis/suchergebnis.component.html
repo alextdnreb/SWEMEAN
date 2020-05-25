@@ -76,6 +76,12 @@
                   {{ element.kategorie }}
                 </td>
               </ng-container>
+              <ng-container matColumnDef="ort">
+                <th mat-header-cell *matHeaderCellDef>Ort</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.adresse.plz }} - {{ element.adresse.ort }}
+                </td>
+              </ng-container>
               <ng-container matColumnDef="details">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">

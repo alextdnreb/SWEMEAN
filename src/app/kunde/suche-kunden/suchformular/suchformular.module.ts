@@ -27,6 +27,7 @@ import { SucheEmailModule } from './suche-email.module';
 import { SucheInteressenModule } from './suche-interessen.module';
 import { SucheKategorieModule } from './suche-kategorie.module';
 import { SucheNachnameModule } from './suche-nachname.module';
+import { SucheOrtModule } from './suche-ort.module';
 import { SuchformularComponent } from './suchformular.component';
 
 // Ein Modul enthaelt logisch zusammengehoerige Funktionalitaet.
@@ -47,6 +48,7 @@ import { SuchformularComponent } from './suchformular.component';
         SucheInteressenModule,
         SucheKategorieModule,
         SucheNachnameModule,
+        SucheOrtModule,
     ],
 })
 export class SuchformularModule {}
