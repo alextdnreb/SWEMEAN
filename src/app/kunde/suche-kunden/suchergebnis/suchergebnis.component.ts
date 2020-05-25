@@ -26,7 +26,6 @@ import { HttpStatus } from '../../../shared';
 import { Input } from '@angular/core';
 import { Kunde } from '../../shared';
 import { KundeService } from '../../shared';
-import { NgLocalization } from '@angular/common';
 import type { OnChanges } from '@angular/core';
 import type { OnInit } from '@angular/core';
 import type { RemoveError } from '../../shared';
