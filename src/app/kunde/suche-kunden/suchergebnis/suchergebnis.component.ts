@@ -60,6 +60,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         'interessen',
         'kategorie',
         'ort',
+        'geschlecht',
         'details',
         'loeschen',
     ];
@@ -151,6 +152,21 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
                 }
             })
             .join(', ');
+    }
+
+    getGeschlecht(geschlecht: string) {
+        /* eslint-disable-next-line no-null/no-null */
+        if (geschlecht === null || geschlecht.length === 0) {
+            return '';
+        }
+        switch (geschlecht) {
+            case 'M':
+                return 'männlich';
+            case 'W':
+                return 'weiblich';
+            default:
+                return 'unbekannt';
+        }
     }
 
     /**

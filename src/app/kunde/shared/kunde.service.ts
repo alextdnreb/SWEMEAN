@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import { Adresse, Kunde, KundeServer } from './kunde';
+import { Adresse, Kunde, KundeServer, Geschlecht } from './kunde';
 import {
     ChartColor,
     ChartConfiguration,
@@ -422,6 +422,7 @@ export class KundeService {
      * @param suchkriterien Suchkriterien fuer den GET-Request.
      * @return Parameter fuer den GET-Request
      */
+    // eslint-disable-next-line max-lines-per-function
     private suchkriterienToHttpParams(
         suchkriterien: Suchkriterien | undefined,
     ): HttpParams {
@@ -442,6 +443,7 @@ export class KundeService {
             kategorie,
             plz,
             ort,
+            geschlecht,
         } = suchkriterien;
 
         const { reisen, lesen, sport } = interessen;
@@ -460,6 +462,10 @@ export class KundeService {
 
         if (ort !== undefined && ort.length !== 0) {
             httpParams = httpParams.set('ort', ort);
+        }
+
+        if (geschlecht !== undefined && geschlecht.length !== 0) {
+            httpParams = httpParams.set('geschlecht', geschlecht);
         }
 
         if (email !== undefined) {
@@ -506,5 +512,6 @@ export interface Suchkriterien {
     kategorie?: string;
     ort?: string;
     plz?: string;
+    geschlecht?: string;
 }
 /* eslint-enable max-lines,no-null/no-null */
