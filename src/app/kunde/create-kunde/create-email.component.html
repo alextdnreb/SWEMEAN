@@ -1,0 +1,30 @@
+<div class="form-group row">
+  <label for="emailInput" class="col col-2 form-control-label"> Email * </label>
+  <div class="col col-10" [formGroup]="form">
+    <input
+      id="emailInput"
+      placeholder="Email-Adresse, z.B. test@gmail.com"
+      class="form-control"
+      required
+      minlength="2"
+      formControlName="email"
+      [class.border-danger]="email.invalid && email.touched"
+    />
+
+    <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+      <div *ngIf="email.errors && email.errors.required">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        <span class="ml-1">
+          Eine Email-Adresse, z.B. test@gmail.com, muss eingegeben werden.
+        </span>
+      </div>
+      <div *ngIf="email.errors && email.errors.pattern">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        <span class="ml-1">
+          Eine g&uuml;ltige Email-Adresse, z.B. test@gmail.com, muss eingegeben
+          werden .
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

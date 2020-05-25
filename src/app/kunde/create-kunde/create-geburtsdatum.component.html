@@ -1,0 +1,31 @@
+<div class="form-group row">
+  <label for="geburtsdatumInput" class="col col-2 form-control-label">
+    Geburtsdatum *
+  </label>
+  <div class="col col-10" [formGroup]="form">
+    <div class="input-group">
+      <input
+        id="geburtsdatumInput"
+        placeholder="Geburtsdatum, dd.MM.yyyy"
+        required
+        type="date"
+        class="form-control"
+        formControlName="geburtsdatum"
+        [class.border-danger]="geburtsdatum.invalid && geburtsdatum.touched"
+      />
+      <span class="input-group-addon"> </span>
+    </div>
+
+    <div
+      *ngIf="geburtsdatum.invalid && geburtsdatum.touched"
+      class="alert alert-danger"
+    >
+      <div *ngIf="geburtsdatum.errors && geburtsdatum.errors.required">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        <span class="ml-1">
+          Ein Geburtsdatum muss in Prozent eingegeben werden, z.B. 20.12.1934
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
