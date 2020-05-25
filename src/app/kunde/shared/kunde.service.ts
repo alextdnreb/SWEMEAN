@@ -434,13 +434,18 @@ export class KundeService {
             return httpParams;
         }
 
-        const { nachname, email, interessen } = suchkriterien;
+        const { nachname, email, interessen, kategorie } = suchkriterien;
 
         const { reisen, lesen, sport } = interessen;
 
         if (nachname !== undefined) {
             httpParams = httpParams.set('nachname', nachname);
         }
+
+        if (kategorie !== undefined && kategorie.length !== 0) {
+            httpParams = httpParams.set('kategorie', kategorie);
+        }
+
         if (email !== undefined) {
             httpParams = httpParams.set('email', email);
         }
@@ -482,5 +487,6 @@ export interface Suchkriterien {
     email?: string;
     adresse?: Adresse;
     interessen: { reisen: boolean; lesen: boolean; sport: boolean };
+    kategorie?: string;
 }
 /* eslint-enable max-lines,no-null/no-null */

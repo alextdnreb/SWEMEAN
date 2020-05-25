@@ -19,6 +19,7 @@ import { Component, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SucheEmailComponent } from './suche-email.component';
 import { SucheInteressenComponent } from './suche-interessen.component';
+import { SucheKategorieComponent } from './suche-kategorie.component';
 import { SucheNachnameComponent } from './suche-nachname.component';
 import type { Suchkriterien } from '../../shared/kunde.service';
 import { fadeIn } from '../../../shared/animations';
@@ -53,6 +54,9 @@ export class SuchformularComponent {
     @ViewChild(SucheInteressenComponent, { static: true })
     private readonly sucheInteressenComponent!: SucheInteressenComponent;
 
+    @ViewChild(SucheKategorieComponent, { static: true })
+    private readonly sucheKategorieComponent!: SucheKategorieComponent;
+
     // DI: Constructor Injection (React hat uebrigens keine DI)
     // Empfehlung: Konstruktor nur fuer DI
     constructor() {
@@ -70,8 +74,9 @@ export class SuchformularComponent {
         const { reisen } = this.sucheInteressenComponent;
         const { lesen } = this.sucheInteressenComponent;
         const { sport } = this.sucheInteressenComponent;
+        const { kategorie } = this.sucheKategorieComponent;
         console.log(
-            `SuchformularComponent.onFind(): nachname=${nachname}, email=${email}, reisen=${reisen}, lesen=${lesen}, sport=${sport}`,
+            `SuchformularComponent.onFind(): nachname=${nachname}, email=${email}, reisen=${reisen}, lesen=${lesen}, sport=${sport} kategorie=${kategorie}`,
         );
 
         console.log('SuchformularComponent.onFind(): do');
@@ -79,12 +84,14 @@ export class SuchformularComponent {
             this.suchkriterien.next({
                 nachname,
                 interessen: { reisen, lesen, sport },
+                kategorie,
             });
         } else {
             this.suchkriterien.next({
                 nachname,
                 email,
                 interessen: { reisen, lesen, sport },
+                kategorie,
             });
         }
 

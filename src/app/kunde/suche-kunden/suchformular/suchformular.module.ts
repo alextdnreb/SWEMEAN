@@ -25,6 +25,7 @@ import { NgModule } from '@angular/core';
 
 import { SucheEmailModule } from './suche-email.module';
 import { SucheInteressenModule } from './suche-interessen.module';
+import { SucheKategorieModule } from './suche-kategorie.module';
 import { SucheNachnameModule } from './suche-nachname.module';
 import { SuchformularComponent } from './suchformular.component';
 
@@ -44,6 +45,7 @@ import { SuchformularComponent } from './suchformular.component';
         MatInputModule,
         SucheEmailModule,
         SucheInteressenModule,
+        SucheKategorieModule,
         SucheNachnameModule,
     ],
 })
