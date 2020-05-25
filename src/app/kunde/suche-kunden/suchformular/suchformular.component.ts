@@ -22,6 +22,7 @@ import { SucheInteressenComponent } from './suche-interessen.component';
 import { SucheKategorieComponent } from './suche-kategorie.component';
 import { SucheNachnameComponent } from './suche-nachname.component';
 import { SucheOrtComponent } from './suche-ort.component';
+import { SucheGeschlechtComponent } from './suche-geschlecht.component';
 import type { Suchkriterien } from '../../shared/kunde.service';
 import { fadeIn } from '../../../shared/animations';
 
@@ -61,6 +62,9 @@ export class SuchformularComponent {
     @ViewChild(SucheOrtComponent, { static: true })
     private readonly sucheOrtComponent!: SucheOrtComponent;
 
+    @ViewChild(SucheGeschlechtComponent, { static: true })
+    private readonly sucheGeschlechtComponent!: SucheGeschlechtComponent;
+
     // DI: Constructor Injection (React hat uebrigens keine DI)
     // Empfehlung: Konstruktor nur fuer DI
     constructor() {
@@ -81,8 +85,9 @@ export class SuchformularComponent {
         const { kategorie } = this.sucheKategorieComponent;
         const { ort } = this.sucheOrtComponent;
         const { plz } = this.sucheOrtComponent;
+        const { geschlecht } = this.sucheGeschlechtComponent;
         console.log(
-            `SuchformularComponent.onFind(): nachname=${nachname}, email=${email}, reisen=${reisen}, lesen=${lesen}, sport=${sport} kategorie=${kategorie} ort=${ort} ort=${plz}`,
+            `SuchformularComponent.onFind(): nachname=${nachname}, email=${email}, reisen=${reisen}, lesen=${lesen}, sport=${sport} kategorie=${kategorie} ort=${ort} ort=${plz} geschlecht=${geschlecht}`,
         );
 
         console.log('SuchformularComponent.onFind(): do');
@@ -93,6 +98,7 @@ export class SuchformularComponent {
                 kategorie,
                 ort,
                 plz,
+                geschlecht,
             });
         } else {
             this.suchkriterien.next({
@@ -102,6 +108,7 @@ export class SuchformularComponent {
                 kategorie,
                 ort,
                 plz,
+                geschlecht,
             });
         }
 

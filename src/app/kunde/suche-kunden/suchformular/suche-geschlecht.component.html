@@ -14,25 +14,28 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
+<!--
+    Bootstrap:
+        (xs):    -  480px ("extra small")
+        sm:      -  767px ("small")
+        md:  768 -  991px ("medium")
+        lg:  992 - 1199px ("large")
+        xl: 1200 px       ("extra large")
+    CSS-Klassen von Bootstrap:
+        card-..., form-..., row, btn, bg-primary, ...
+        https://getbootstrap.com/docs/4.0/components/forms
+-->
 
-<mat-card [@fadeIn]="'in'">
-  <mat-card-content>
-    <mat-card-title>Suche</mat-card-title>
-    <mat-card-subtitle>f&uuml;r Kunden</mat-card-subtitle>
-    <form (submit)="onFind()" role="form">
-      <swe-suche-nachname></swe-suche-nachname>
-      <swe-suche-email></swe-suche-email>
-      <swe-suche-interessen></swe-suche-interessen>
-      <swe-suche-kategorie></swe-suche-kategorie>
-      <swe-suche-ort></swe-suche-ort>
-      <swe-suche-geschlecht></swe-suche-geschlecht>
-      <div>
-        <div>
-          <button mat-raised-button type="submit" color="primary">
-            <i class="material-icons">search</i> Suchen
-          </button>
-        </div>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+<div>
+    <div>Geschlecht</div>
+    <mat-radio-group
+      matInput
+      id="geschlechtInput"
+      [(ngModel)]="geschlecht"
+      name="geschlecht"    
+    >
+      <mat-radio-button value="">alle</mat-radio-button>
+      <mat-radio-button value="M">männlich</mat-radio-button>
+      <mat-radio-button value="W">weiblich</mat-radio-button>
+    </mat-radio-group>
+</div>

@@ -60,6 +60,12 @@
                   {{ element.nachname }}
                 </td>
               </ng-container>
+              <ng-container matColumnDef="geschlecht">
+                <th mat-header-cell *matHeaderCellDef>Geschlecht</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ getGeschlecht(element.geschlecht) }}
+                </td>
+              </ng-container>
               <ng-container matColumnDef="email">
                 <th mat-header-cell *matHeaderCellDef>E-Mail</th>
                 <td mat-cell *matCellDef="let element">{{ element.email }}</td>
