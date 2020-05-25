@@ -21,6 +21,7 @@ import { SucheEmailComponent } from './suche-email.component';
 import { SucheInteressenComponent } from './suche-interessen.component';
 import { SucheKategorieComponent } from './suche-kategorie.component';
 import { SucheNachnameComponent } from './suche-nachname.component';
+import { SucheOrtComponent } from './suche-ort.component';
 import type { Suchkriterien } from '../../shared/kunde.service';
 import { fadeIn } from '../../../shared/animations';
 
@@ -57,6 +58,9 @@ export class SuchformularComponent {
     @ViewChild(SucheKategorieComponent, { static: true })
     private readonly sucheKategorieComponent!: SucheKategorieComponent;
 
+    @ViewChild(SucheOrtComponent, { static: true })
+    private readonly sucheOrtComponent!: SucheOrtComponent;
+
     // DI: Constructor Injection (React hat uebrigens keine DI)
     // Empfehlung: Konstruktor nur fuer DI
     constructor() {
@@ -75,8 +79,10 @@ export class SuchformularComponent {
         const { lesen } = this.sucheInteressenComponent;
         const { sport } = this.sucheInteressenComponent;
         const { kategorie } = this.sucheKategorieComponent;
+        const { ort } = this.sucheOrtComponent;
+        const { plz } = this.sucheOrtComponent;
         console.log(
-            `SuchformularComponent.onFind(): nachname=${nachname}, email=${email}, reisen=${reisen}, lesen=${lesen}, sport=${sport} kategorie=${kategorie}`,
+            `SuchformularComponent.onFind(): nachname=${nachname}, email=${email}, reisen=${reisen}, lesen=${lesen}, sport=${sport} kategorie=${kategorie} ort=${ort} ort=${plz}`,
         );
 
         console.log('SuchformularComponent.onFind(): do');
@@ -85,6 +91,8 @@ export class SuchformularComponent {
                 nachname,
                 interessen: { reisen, lesen, sport },
                 kategorie,
+                ort,
+                plz,
             });
         } else {
             this.suchkriterien.next({
@@ -92,6 +100,8 @@ export class SuchformularComponent {
                 email,
                 interessen: { reisen, lesen, sport },
                 kategorie,
+                ort,
+                plz,
             });
         }
 

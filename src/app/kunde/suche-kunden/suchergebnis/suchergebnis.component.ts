@@ -59,6 +59,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         'email',
         'interessen',
         'kategorie',
+        'ort',
         'details',
         'loeschen',
     ];

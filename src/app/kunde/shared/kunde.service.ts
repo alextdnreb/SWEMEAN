@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable max-lines,no-null/no-null */
 
 /*
@@ -434,16 +435,31 @@ export class KundeService {
             return httpParams;
         }
 
-        const { nachname, email, interessen, kategorie } = suchkriterien;
+        const {
+            nachname,
+            email,
+            interessen,
+            kategorie,
+            plz,
+            ort,
+        } = suchkriterien;
 
         const { reisen, lesen, sport } = interessen;
 
-        if (nachname !== undefined) {
+        if (nachname !== undefined && nachname.length !== 0) {
             httpParams = httpParams.set('nachname', nachname);
         }
 
         if (kategorie !== undefined && kategorie.length !== 0) {
             httpParams = httpParams.set('kategorie', kategorie);
+        }
+
+        if (plz !== undefined && plz.length !== 0) {
+            httpParams = httpParams.set('plz', plz);
+        }
+
+        if (ort !== undefined && ort.length !== 0) {
+            httpParams = httpParams.set('ort', ort);
         }
 
         if (email !== undefined) {
@@ -488,5 +504,7 @@ export interface Suchkriterien {
     adresse?: Adresse;
     interessen: { reisen: boolean; lesen: boolean; sport: boolean };
     kategorie?: string;
+    ort?: string;
+    plz?: string;
 }
 /* eslint-enable max-lines,no-null/no-null */
