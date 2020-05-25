@@ -17,11 +17,12 @@
 
 import { CommonModule } from '@angular/common';
 import { ErrorMessageComponent } from './error-message.component';
+import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 
 @NgModule({
     declarations: [ErrorMessageComponent],
     exports: [ErrorMessageComponent],
-    imports: [CommonModule],
+    imports: [MatButtonModule, CommonModule],
 })
 export class ErrorMessageModule {}

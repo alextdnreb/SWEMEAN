@@ -17,7 +17,4 @@
 
 <!-- --ggf. Sweetalert2 https://github.com/sweetalert2/sweetalert2 -->
 
-<div class="text-danger" aria-label="Fehler" *ngIf="text">
-  <i class="material-icons">error</i>
-  <span class="font-weight-bold ml-1">{{ text }}</span>
-</div>
+<button mat-raised-button color="warn" *ngIf="text">{{ text }}</button>
