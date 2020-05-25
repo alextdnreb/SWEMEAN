@@ -15,11 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgModule } from '@angular/core';
 import { WaitingComponent } from './waiting.component';
 
 @NgModule({
     declarations: [WaitingComponent],
     exports: [WaitingComponent],
+    imports: [MatButtonModule, MatProgressBarModule],
 })
 export class WaitingModule {}
