@@ -14,8 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable max-classes-per-file */
 
 // Bereitgestellt durch das RouterModule
 import { ActivatedRoute, Router } from '@angular/router';
@@ -42,7 +40,7 @@ import { easeOut } from '../../../shared/animations';
 @Component({
     selector: 'swe-suchergebnis',
     templateUrl: './suchergebnis.component.html',
-    styleUrls: ['suchergebnis.component.scss'],
+    styleUrls: ['./suchergebnis.component.scss'],
     animations: [easeIn, easeOut],
 })
 export class SuchergebnisComponent implements OnChanges, OnInit {
@@ -60,6 +58,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         'nachname',
         'email',
         'interessen',
+        'kategorie',
         'details',
         'loeschen',
     ];
