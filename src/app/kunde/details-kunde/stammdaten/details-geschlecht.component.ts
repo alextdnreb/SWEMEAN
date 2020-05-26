@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Geschlecht } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
 
 /**
@@ -12,9 +13,9 @@ export class DetailsGeschlechtComponent implements OnInit {
     // <swe-geschlecht [values]="kunde.geschlecht">
     // Decorator fuer ein Attribut. Siehe InputMetadata
     @Input()
-    readonly values!: Array<string>;
+    readonly geschlecht!: Geschlecht;
 
     ngOnInit() {
-        console.log('DetailsGeschlechtComponent.values=', this.values);
+        console.log('DetailsGeschlechtComponent.values=', this.geschlecht);
     }
 }

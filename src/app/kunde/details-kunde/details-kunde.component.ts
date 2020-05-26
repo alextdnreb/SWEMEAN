@@ -1,14 +1,13 @@
 import { ActivatedRoute, Params } from '@angular/router';
-import { AuthService, ROLLE_ADMIN } from '../../auth/auth.service';
 import { Kunde, KundeService } from '../shared';
 import type { OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 import { Component } from '@angular/core';
+import { FindError } from './../shared/errors';
 import { HttpStatus } from '../../shared';
 import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-/**
- * Komponente f&uuml;r das Tag <code>swe-details-kunde</code>
- */
+
 @Component({
     selector: 'swe-details-kunde',
     templateUrl: './details-kunde.component.html',
@@ -22,15 +21,7 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
 
     isAdmin!: boolean;
 
-    private kundeSubscription!: Subscription;
-
-    private errorSubscription!: Subscription;
-
     private idParamSubscription!: Subscription;
-
-    private isAdminSubscription!: Subscription;
-
-    private findByIdSubscription: Subscription | undefined;
 
     // eslint-disable-next-line max-params
     constructor(
@@ -43,87 +34,79 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // Die Beobachtung starten, ob es ein zu darzustellenden Kunde oder
-        // einen Fehler gibt.
-        this.kundeSubscription = this.subscribeKunde();
-        this.errorSubscription = this.subscribeError();
+        // Die Beobachtung starten, ob es einen Pfadparameter gibt, ohne dass
+        // bisher ein JavaScript-Ereignis, wie z.B. click, eingetreten ist.
         this.idParamSubscription = this.subscribeIdParam();
 
         // Initialisierung, falls zwischenzeitlich der Browser geschlossen wurde
         this.isAdmin = this.authService.isAdmin;
-        this.isAdminSubscription = this.subscribeIsAdmin();
     }
 
     ngOnDestroy() {
-        this.kundeSubscription.unsubscribe();
-        this.errorSubscription.unsubscribe();
         this.idParamSubscription.unsubscribe();
-        this.isAdminSubscription.unsubscribe();
-
-        if (this.findByIdSubscription !== undefined) {
-            this.findByIdSubscription.unsubscribe();
-        }
-    }
-
-    private subscribeKunde() {
-        const next = (kunde: Kunde) => {
-            this.waiting = false;
-            this.kunde = kunde;
-            console.log('DetailsKundeComponent.kunde=', this.kunde);
-            const titel =
-                this.kunde === undefined
-                    ? 'Details'
-                    : `Details ${this.kunde._id}`;
-            this.titleService.setTitle(titel);
-        };
-        return this.kundeService.kundeSubject.subscribe(next);
-    }
-
-    private subscribeError() {
-        const next = (err: string | number | undefined) => {
-            this.waiting = false;
-            if (err === undefined) {
-                this.errorMsg = 'Ein Fehler ist aufgetreten.';
-                return;
-            }
-
-            if (typeof err === 'string') {
-                this.errorMsg = err;
-                return;
-            }
-
-            this.errorMsg =
-                err === HttpStatus.NOT_FOUND
-                    ? 'Kein Kunde gefunden.'
-                    : 'Ein Fehler ist aufgetreten.';
-            console.log(`DetailsKundeComponent.errorMsg: ${this.errorMsg}`);
-
-            this.titleService.setTitle('Fehler');
-        };
-
-        return this.kundeService.errorSubject.subscribe(next);
     }
 
     private subscribeIdParam() {
+        // Pfad-Parameter aus /buecher/:id
         // UUID (oder Mongo-ID) ist ein String
+
+        // next-Function fuer Observable
         const next = (params: Params) => {
             console.log(
                 'DetailsKundeComponent.subscribeIdParam(): params=',
                 params,
             );
-            this.findByIdSubscription = this.kundeService.findById(params.id);
+
+            // IIFE (= Immediately Invoked Function Expression) statt async Function
+            // https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+            // https://github.com/typescript-eslint/typescript-eslint/issues/647
+            // https://github.com/typescript-eslint/typescript-eslint/pull/1799
+            (async () => {
+                try {
+                    this.kunde = await this.kundeService.findById(params.id);
+                } catch (err) {
+                    this.handleError(err);
+                    return;
+                } finally {
+                    this.waiting = false;
+                }
+
+                this.errorMsg = undefined;
+                const titel =
+                    this.kunde === undefined
+                        ? 'Details'
+                        : `Details ${this.kunde._id}`;
+                this.titleService.setTitle(titel);
+            })();
         };
+
         // ActivatedRoute.params ist ein Observable
         return this.route.params.subscribe(next);
     }
 
-    private subscribeIsAdmin() {
-        const nextIsAdmin = (event: Array<string>) => {
-            this.isAdmin = event.includes(ROLLE_ADMIN);
-            console.log(
-                `DetailsKundeComponent.subscribeIsAdmin(): isAdmin=${this.isAdmin}`,
-            );
-        };
-        return this.authService.rollenSubject.subscribe(nextIsAdmin);
+    private handleError(err: FindError) {
+        const { statuscode } = err;
+        console.log(`DetailsComponent.handleError(): statuscode=${statuscode}`);
+
+        this.kunde = undefined;
+
+        switch (statuscode) {
+            case HttpStatus.NOT_FOUND:
+                this.errorMsg = 'Kein Kunde gefunden.';
+                break;
+            case HttpStatus.TOO_MANY_REQUESTS:
+                this.errorMsg =
+                    'Zu viele Anfragen. Bitte versuchen Sie es später noch einmal.';
+                break;
+            case HttpStatus.GATEWAY_TIMEOUT:
+                this.errorMsg = 'Ein interner Fehler ist aufgetreten.';
+                console.error('Laeuft der Appserver?');
+                break;
+            default:
+                this.errorMsg = 'Ein unbekannter Fehler ist aufgetreten.';
+                break;
+        }
+
+        this.titleService.setTitle('Fehler');
     }
 }
