@@ -1,10 +1,22 @@
 <div class="swe-desktop-menu">
-  <a routerLink="/" class="swe-nav-link"><i class="material-icons">home</i></a>
+  <a routerLink="/" class="swe-nav-link"
+    ><i class="material-icons">home</i>Home</a
+  >
   <a routerLink="/kunden/create" *ngIf="isAdmin" class="swe-nav-link"
     ><i class="material-icons">person_add</i>Erstellen</a
   >
   <swe-window-controls></swe-window-controls>
-  <swe-login-logout></swe-login-logout>
+  <swe-login-logout
+    [ngStyle]="{ float: preloaded ? 'none' : 'right' }"
+  ></swe-login-logout>
+  <a [matMenuTriggerFor]="diagrams" class="swe-nav-link" *ngIf="isAdmin">
+    <i class="material-icons">keyboard_arrow_down</i>Diagramme
+  </a>
+  <mat-menu #diagrams="matMenu">
+    <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
+    <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
+    <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
+  </mat-menu>
   <a routerLink="/kunden/suche" class="swe-nav-link"
     ><i class="material-icons">search</i></a
   >
@@ -14,11 +26,20 @@
     <i class="material-icons">menu</i>
   </button>
   <mat-menu #menu="matMenu">
-    <a routerLink="/" mat-menu-item><i class="material-icons">home</i></a>
+    <a routerLink="/" mat-menu-item><i class="material-icons">home</i>Home</a>
     <a routerLink="/kunden/suche" mat-menu-item
-      ><i class="material-icons">search</i></a
+      ><i class="material-icons">search</i>Suche</a
     >
+    <span mat-menu-item [matMenuTriggerFor]="diagramme">
+      <i class="material-icons">show_chart</i>Diagramme
+    </span>
+
     <span mat-menu-item><swe-login-logout></swe-login-logout></span>
+  </mat-menu>
+  <mat-menu #diagramme="matMenu">
+    <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
+    <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
+    <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
   </mat-menu>
   <swe-window-controls></swe-window-controls>
 </div>

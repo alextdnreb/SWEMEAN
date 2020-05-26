@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,18 +11,25 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy oSf the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* eslint-disable @typescript-eslint/no-magic-numbers */
+import { Component } from '@angular/core';
 
-export enum HttpStatus {
-    OK = 200,
-    BAD_REQUEST = 400,
-    NOT_FOUND = 404,
-    TOO_MANY_REQUESTS = 429,
-    GATEWAY_TIMEOUT = 504,
+/**
+ * Komponente f&uuml;r das Tag <code>hs-suche-interessen</code>
+ */
+@Component({
+    selector: 'swe-suche-interessen',
+    templateUrl: './suche-interessen.component.html',
+})
+export class SucheInteressenComponent {
+    reisen = false;
+    lesen = false;
+    sport = false;
+
+    constructor() {
+        console.log('SucheInteressenComponent.constructor()');
+    }
 }
-
-/* eslint-enable @typescript-eslint/no-magic-numbers */

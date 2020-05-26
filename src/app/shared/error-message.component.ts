@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* eslint-disable @typescript-eslint/no-magic-numbers */
+import { Component, Input } from '@angular/core';
 
-export enum HttpStatus {
-    OK = 200,
-    BAD_REQUEST = 400,
-    NOT_FOUND = 404,
-    TOO_MANY_REQUESTS = 429,
-    GATEWAY_TIMEOUT = 504,
+/**
+ * Komponente f&uuml;r die Darstellung einer Fehlermeldung durch das Tag
+ * &lt;hs-error-message [text]="..."&gt;
+ */
+@Component({
+    selector: 'swe-error-message',
+    templateUrl: './error-message.component.html',
+})
+export class ErrorMessageComponent {
+    // Property Binding: <hs-error-message [text]="...">
+    // siehe InputMetadata
+    @Input()
+    text: string | undefined;
+
+    constructor() {
+        console.log('ErrorMessageComponent.constructor()');
+    }
 }
-
-/* eslint-enable @typescript-eslint/no-magic-numbers */

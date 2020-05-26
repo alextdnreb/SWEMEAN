@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* eslint-disable @typescript-eslint/no-magic-numbers */
+import { Component } from '@angular/core';
 
-export enum HttpStatus {
-    OK = 200,
-    BAD_REQUEST = 400,
-    NOT_FOUND = 404,
-    TOO_MANY_REQUESTS = 429,
-    GATEWAY_TIMEOUT = 504,
+/**
+ * Komponente f&uuml;r das Tag <code>hs-suche-titel</code>
+ */
+@Component({
+    selector: 'swe-suche-geschlecht',
+    templateUrl: './suche-geschlecht.component.html',
+})
+export class SucheGeschlechtComponent {
+    geschlecht = '';
+
+    constructor() {
+        console.log('SucheGeschlechtComponent.constructor()');
+    }
 }
-
-/* eslint-enable @typescript-eslint/no-magic-numbers */
