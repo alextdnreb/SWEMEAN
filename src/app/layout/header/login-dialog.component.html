@@ -1,4 +1,9 @@
-<div class="swe-dialog-container">
+<form
+  autocomplete="off"
+  (submit)="onSubmit()"
+  class="swe-dialog-container"
+  role="form"
+>
   <h1 mat-dialog-title>Anmelden</h1>
   <mat-dialog-content>
     <mat-form-field
@@ -45,4 +50,4 @@
       Send
     </button>
   </mat-dialog-actions>
-</div>
+</form>
