@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'swe-details-email',
-    templateUrl: './details-email.component.html',
+    selector: 'swe-details-plz',
+    templateUrl: './details-plz.component.html',
 })
-export class DetailsEmailComponent implements OnInit {
+export class DetailsPlzComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
@@ -15,18 +15,18 @@ export class DetailsEmailComponent implements OnInit {
     @Input()
     readonly isDisabled: boolean;
 
-    email!: FormControl;
+    plz!: FormControl;
 
     ngOnInit() {
         console.log(
-            'DetailsEmailComponent.ngOnInit(): currentValue=',
+            'DetailsOrtComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.email = new FormControl(
+        this.plz = new FormControl(
             { value: this.currentValue, disabled: this.isDisabled },
             Validators.compose([Validators.required]),
         );
-        this.form.addControl('email', this.email);
+        this.form.addControl('plz', this.plz);
     }
 }

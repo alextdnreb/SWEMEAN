@@ -12,6 +12,9 @@ export class DetailsGeburtsdatumComponent implements OnInit {
     @Input()
     readonly currentValue!: Date | undefined;
 
+    @Input()
+    readonly isDisabled: boolean;
+
     geburtsdatum!: FormControl;
 
     ngOnInit() {
@@ -20,7 +23,10 @@ export class DetailsGeburtsdatumComponent implements OnInit {
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.geburtsdatum = new FormControl(this.currentValue);
+        this.geburtsdatum = new FormControl({
+            value: this.currentValue,
+            disabled: this.isDisabled,
+        });
         this.form.addControl('geburtsdatum', this.geburtsdatum);
     }
 }

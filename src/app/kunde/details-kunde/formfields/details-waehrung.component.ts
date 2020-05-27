@@ -1,32 +1,34 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { Waehrung } from '../../shared/kunde';
+
 @Component({
-    selector: 'swe-details-newsletter',
-    templateUrl: './details-newsletter.component.html',
+    selector: 'swe-details-waehrung',
+    templateUrl: './details-waehrung.component.html',
 })
-export class DetailsNewsletterComponent implements OnInit {
+export class DetailsWaehrungComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue!: boolean;
+    readonly currentValue!: Waehrung | undefined;
 
     @Input()
     readonly isDisabled: boolean;
 
-    newsletter!: FormControl;
+    waehrung!: FormControl;
 
     ngOnInit() {
         console.log(
-            'DetailsNewsletterComponent.ngOnInit(): currentValue=',
+            'DetailsWaehrungComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.newsletter = new FormControl({
+        this.waehrung = new FormControl({
             value: this.currentValue,
             disabled: this.isDisabled,
         });
-        this.form.addControl('newsletter', this.newsletter);
+        this.form.addControl('waehrung', this.waehrung);
     }
 }

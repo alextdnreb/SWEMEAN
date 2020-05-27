@@ -14,6 +14,9 @@ export class DetailsGeschlechtComponent implements OnInit {
     @Input()
     readonly currentValue!: Geschlecht | undefined;
 
+    @Input()
+    readonly isDisabled: boolean;
+
     geschlecht!: FormControl;
 
     ngOnInit() {
@@ -22,7 +25,10 @@ export class DetailsGeschlechtComponent implements OnInit {
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.geschlecht = new FormControl(this.currentValue);
+        this.geschlecht = new FormControl({
+            value: this.currentValue,
+            disabled: this.isDisabled,
+        });
         this.form.addControl('geschlecht', this.geschlecht);
     }
 }

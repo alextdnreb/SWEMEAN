@@ -31,7 +31,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
     selector: 'swe-login-logout',
     templateUrl: './login-logout.component.html',
-    styleUrls: ['./login-logout.component.scss'],
 })
 export class LoginLogoutComponent implements OnInit, OnDestroy {
     username: string | undefined;

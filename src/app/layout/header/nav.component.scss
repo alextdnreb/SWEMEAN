@@ -4,9 +4,14 @@
 
 .swe-burger-menu {
   background: transparent;
+  color: white;
   border: none;
   -webkit-user-select: auto;
   -webkit-app-region: no-drag;
+}
+
+.swe-mobile-menu-icon {
+  margin-right: 5px;
 }
 
 @media only screen and (max-width: 600px) {

@@ -12,6 +12,9 @@ export class DetailsKategorieComponent implements OnInit {
     @Input()
     readonly currentValue!: number | undefined;
 
+    @Input()
+    readonly isDisabled: boolean;
+
     kategorie!: FormControl;
 
     ngOnInit() {
@@ -20,7 +23,10 @@ export class DetailsKategorieComponent implements OnInit {
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.kategorie = new FormControl(this.currentValue);
+        this.kategorie = new FormControl({
+            value: this.currentValue,
+            disabled: this.isDisabled,
+        });
         this.form.addControl('kategorie', this.kategorie);
     }
 }

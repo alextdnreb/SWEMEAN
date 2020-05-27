@@ -1,27 +1,11 @@
-/*
- * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnDestroy } from '@angular/core';
 import { FindError, Kunde } from '../shared';
+import { HOME_PATH, HttpStatus } from '../../shared';
 import { AuthService } from '../../auth/auth.service';
 import { FormGroup } from '@angular/forms';
-import { HttpStatus } from '../../shared';
 import { KundeService } from '../shared/kunde.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import type { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
@@ -48,6 +32,7 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
         private readonly kundeService: KundeService,
         private readonly titleService: Title,
         private readonly route: ActivatedRoute,
+        private readonly router: Router,
         private readonly authService: AuthService,
     ) {
         console.log('DetailsKundeComponent.constructor()');
@@ -64,6 +49,74 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.idParamSubscription.unsubscribe();
+    }
+
+    onChange(event: MatSlideToggleChange) {
+        if (event.checked) {
+            this.form.enable();
+        } else {
+            this.form.disable();
+        }
+    }
+    async onUpdate() {
+        if (this.form.pristine) {
+            console.log(
+                'UpdateStammdatenComponent.onUpdate(): keine Aenderungen',
+            );
+            return;
+        }
+
+        if (this.kunde === undefined) {
+            console.error(
+                'UpdateStammdatenComponent.onUpdate(): buch === undefined',
+            );
+            return;
+        }
+
+        this.kunde.update(
+            this.form.value.nachname,
+            this.form.value.email,
+            this.form.value.kategorie,
+            this.form.value.newsletter,
+            this.form.value.geburtsdatum,
+            {
+                betrag: this.form.value.betrag,
+                waehrung: this.form.value.waehrung,
+            },
+            this.form.value.homepage,
+            this.form.value.geschlecht,
+            this.form.value.familienstand,
+            { ort: this.form.value.ort, plz: this.form.value.plz },
+            this.form.value.reisen,
+            this.form.value.lesen,
+            this.form.value.sport,
+        );
+        console.log('kunde=', this.kunde);
+
+        const successFn = async () => {
+            console.log(
+                `UpdateStammdaten.onUpdate(): successFn: path: ${HOME_PATH}`,
+            );
+            await this.router.navigate([HOME_PATH]);
+        };
+
+        const errorFn: (
+            status: number,
+            errors: { [s: string]: unknown } | undefined,
+        ) => void = (status, errors?) => {
+            console.error(
+                `UpdateStammdatenComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
+                errors,
+            );
+            // TODO Fehlermeldung anzeigen
+        };
+
+        await this.kundeService.update(this.kunde, successFn, errorFn);
+
+        // damit das (Submit-) Ereignis konsumiert wird und nicht an
+        // uebergeordnete Eltern-Komponenten propagiert wird bis zum
+        // Refresh der gesamten Seite
+        return false;
     }
 
     private subscribeIdParam() {

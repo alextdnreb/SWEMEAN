@@ -15,6 +15,9 @@ export class DetailsNachnameComponent implements OnInit {
     @Input()
     readonly currentValue!: string;
 
+    @Input()
+    readonly isDisabled!: boolean;
+
     nachname!: FormControl;
 
     ngOnInit() {
@@ -24,7 +27,7 @@ export class DetailsNachnameComponent implements OnInit {
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
         this.nachname = new FormControl(
-            this.currentValue,
+            { value: this.currentValue, disabled: this.isDisabled },
             Validators.compose([Validators.required]),
         );
         this.form.addControl('nachname', this.nachname);
