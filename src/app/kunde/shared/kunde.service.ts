@@ -195,14 +195,13 @@ export class KundeService {
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            Accept: 'text/plain',
         });
 
         // Subscription von RxJS als Promise
         let response;
         try {
             response = await this.httpClient
-                .post(this.baseUriKunden, kunde.toJSON(), {
+                .post(this.baseUriKunden, kunde, {
                     headers,
                     observe: 'response',
                     responseType: 'text',
