@@ -10,7 +10,7 @@ export class DetailsOrtComponent implements OnInit {
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue!: string;
+    readonly currentValue!: string | undefined;
 
     @Input()
     readonly isDisabled: boolean;

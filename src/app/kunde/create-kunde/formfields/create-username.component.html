@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <mat-form-field appearance="outline" [formGroup]="form">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        id="usernameInput"
+        placeholder="Username eingeben"
+        formControlName="username"
+    /></mat-form-field>
+
+    <div style="color: red;" *ngIf="username.invalid && username.touched">
+      <i class="material-icons">error</i>
+      <div *ngIf="username.errors && username.errors.required">
+        <span>Eine Username muss eingegeben werden.</span>
+      </div>
+      <div *ngIf="username.errors && username.errors.pattern">
+        <span>
+          Der eingegebene Username ist ungültig.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,7 @@ export interface KundeShared {
     email: string;
     newsletter: boolean;
     geburtsdatum?: string;
+    kategorie?: number;
     umsatz?: Umsatz;
     homepage?: string;
     geschlecht?: Geschlecht;
@@ -42,8 +43,7 @@ export interface Umsatz {
 
 export interface KundeServer extends KundeShared {
     interessen?: Array<string>;
-    kategorie?: number;
-    user?: string | null;
+    user?: User | null;
     username?: string | null;
     _links?: {
         self: Link;
@@ -58,13 +58,23 @@ export interface KundeForm extends KundeShared {
     reisen?: boolean;
     lesen?: boolean;
     sport?: boolean;
-    kategorie?: string;
+    ort: string;
+    plz: string;
+    username: string;
+    password: string;
+    betrag: number;
+    waehrung: Waehrung;
 }
 
 export enum Geschlecht {
     M = 'MAENNLICH',
     W = 'WEIBLICH',
     D = 'DIVERS',
+}
+
+export interface User {
+    username: string;
+    password: string;
 }
 
 export enum Familienstand {
@@ -110,6 +120,7 @@ export class Kunde {
         public familienstand: Familienstand | undefined,
         interessen: Array<string> | undefined,
         public adresse: Adresse,
+        public user: User | undefined,
         public version: number | undefined,
     ) {
         // TODO Parsing, ob der Datum-String valide ist
@@ -159,6 +170,7 @@ export class Kunde {
             kundeServer.familienstand,
             kundeServer.interessen,
             kundeServer.adresse,
+            undefined,
             version,
         );
         console.log('Kunde.fromServer(): Kunde=', kunde);
@@ -187,15 +199,16 @@ export class Kunde {
             kundeForm._id,
             kundeForm.nachname,
             kundeForm.email,
-            Number(kundeForm.kategorie),
+            kundeForm.kategorie,
             kundeForm.newsletter,
             kundeForm.geburtsdatum,
-            kundeForm.umsatz,
+            { betrag: kundeForm.betrag, waehrung: kundeForm.waehrung },
             kundeForm.homepage,
             kundeForm.geschlecht,
             kundeForm.familienstand,
             interessen,
-            kundeForm.adresse,
+            { ort: kundeForm.ort, plz: kundeForm.plz },
+            { username: kundeForm.username, password: kundeForm.password },
             kundeForm.version,
         );
         console.log('Kunde.fromForm(): kunde=', kunde);
@@ -266,13 +279,13 @@ export class Kunde {
         this.adresse = adresse;
         this.resetInteressen();
         if (reisen) {
-            this.addInteresse('REISEN');
+            this.addInteresse('R');
         }
         if (lesen) {
-            this.addInteresse('LESEN');
+            this.addInteresse('L');
         }
         if (sport) {
-            this.addInteresse('SPORT');
+            this.addInteresse('S');
         }
     }
 
@@ -325,6 +338,7 @@ export class Kunde {
             geschlecht: this.geschlecht,
             familienstand: this.familienstand,
             adresse: this.adresse,
+            user: this.user,
         };
     }
 
