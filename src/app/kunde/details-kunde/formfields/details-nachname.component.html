@@ -1,0 +1,26 @@
+<div [class.has-danger]="nachname.invalid && nachname.touched">
+  <div>
+    <mat-form-field [formGroup]="form">
+      Nachname
+      <input
+        matInput
+        id="nachnameInput"
+        placeholder="Nachnamen eingeben"
+        autofocus
+        formControlName="nachname"
+        [class.border-danger]="nachname.invalid && nachname.touched"
+    /></mat-form-field>
+
+    <div *ngIf="nachname.invalid && nachname.touched" color="warn">
+      <i class="material-icons">error</i>
+      <div *ngIf="nachname.errors && nachname.errors.required">
+        <span>Eine E-Mail muss eingegeben werden.</span>
+      </div>
+      <div *ngIf="nachname.errors && nachname.errors.pattern">
+        <span>
+          Der eingegebene Nachname ist ungültig.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div [formGroup]="form">
+  Familienstand
+  <mat-radio-group
+    matInput
+    id="familienstandInput"
+    formControlName="familienstand"
+    name="familienstand"
+  >
+    <mat-radio-button value="D" [checked]="familienstand.value === 'D'"
+      >Divers</mat-radio-button
+    >
+    <mat-radio-button value="M" [checked]="familienstand.value === 'M'"
+      >Männlich</mat-radio-button
+    >
+    <mat-radio-button value="W" [checked]="familienstand.value === 'W'"
+      >Weiblich</mat-radio-button
+    >
+  </mat-radio-group>
+</div>

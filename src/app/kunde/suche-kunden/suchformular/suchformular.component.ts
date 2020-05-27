@@ -18,16 +18,16 @@
 import { Component, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SucheEmailComponent } from './suche-email.component';
+import { SucheGeschlechtComponent } from './suche-geschlecht.component';
 import { SucheInteressenComponent } from './suche-interessen.component';
 import { SucheKategorieComponent } from './suche-kategorie.component';
 import { SucheNachnameComponent } from './suche-nachname.component';
 import { SucheOrtComponent } from './suche-ort.component';
-import { SucheGeschlechtComponent } from './suche-geschlecht.component';
 import type { Suchkriterien } from '../../shared/kunde.service';
 import { fadeIn } from '../../../shared/animations';
 
 /**
- * Komponente f&uuml;r das Tag <code>swe-suchformular</code>
+ * Komponente f&uuml;r das Tag <co de>swe-suchformular</co>
  */
 @Component({
     selector: 'swe-suchformular',
