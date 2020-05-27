@@ -1,0 +1,12 @@
+<div [class.has-danger]="betrag.invalid && betrag.touched">
+  <div>
+    <mat-form-field appearance="outline" [formGroup]="form">
+      <mat-label>Betrag</mat-label>
+      <input
+        matInput
+        id="betragInput"
+        placeholder="Betrag eingeben"
+        formControlName="betrag"
+    /></mat-form-field>
+  </div>
+</div>

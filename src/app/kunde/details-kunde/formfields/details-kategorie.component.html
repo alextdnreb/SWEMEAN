@@ -1,5 +1,5 @@
-<mat-form-field [formGroup]="form">
-  <mat-label>Kategorie</mat-label>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label for="kategorieInput" class="swe-label">Kategorie</mat-label>
   <mat-select
     matInput
     id="kategorieInput"
@@ -7,7 +7,6 @@
     name="kategorie"
     matNativeControl
   >
-    <mat-option [value]="">Keine Kategorie</mat-option>
     <mat-option [value]="0">Kategorie 0</mat-option>
     <mat-option [value]="1">Kategorie 1</mat-option>
     <mat-option [value]="2">Kategorie 2</mat-option>

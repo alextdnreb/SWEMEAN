@@ -14,6 +14,9 @@ export class DetailsFamilienstandComponent implements OnInit {
     @Input()
     readonly currentValue!: Familienstand | undefined;
 
+    @Input()
+    readonly isDisabled: boolean;
+
     familienstand!: FormControl;
 
     ngOnInit() {
@@ -22,7 +25,10 @@ export class DetailsFamilienstandComponent implements OnInit {
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.familienstand = new FormControl(this.currentValue);
+        this.familienstand = new FormControl({
+            value: this.currentValue,
+            disabled: this.isDisabled,
+        });
         this.form.addControl('familienstand', this.familienstand);
     }
 }

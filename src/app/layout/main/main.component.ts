@@ -10,9 +10,10 @@ import { Component } from '@angular/core';
     // beim Routing
     template: `
         <main>
-            <div class="col col-12 mt-3"><router-outlet></router-outlet></div>
+            <div class="swe-main"><router-outlet></router-outlet></div>
         </main>
     `,
+    styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {
     constructor() {

@@ -2,31 +2,31 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-    selector: 'swe-details-newsletter',
-    templateUrl: './details-newsletter.component.html',
+    selector: 'swe-details-homepage',
+    templateUrl: './details-homepage.component.html',
 })
-export class DetailsNewsletterComponent implements OnInit {
+export class DetailsHomepageComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue!: boolean;
+    readonly currentValue!: string | undefined;
 
     @Input()
     readonly isDisabled: boolean;
 
-    newsletter!: FormControl;
+    homepage!: FormControl;
 
     ngOnInit() {
         console.log(
-            'DetailsNewsletterComponent.ngOnInit(): currentValue=',
+            'DetailsHomepageComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.newsletter = new FormControl({
+        this.homepage = new FormControl({
             value: this.currentValue,
             disabled: this.isDisabled,
         });
-        this.form.addControl('newsletter', this.newsletter);
+        this.form.addControl('homepage', this.homepage);
     }
 }

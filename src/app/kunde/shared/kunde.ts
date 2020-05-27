@@ -37,7 +37,7 @@ interface Link {
 
 export interface Umsatz {
     betrag: number;
-    waehrung: string;
+    waehrung: Waehrung;
 }
 
 export interface KundeServer extends KundeShared {
@@ -72,6 +72,15 @@ export enum Familienstand {
     VH = 'VERHEIRATET',
     G = 'GESCHIEDEN',
     VW = 'VERWITWET',
+}
+
+export enum Waehrung {
+    EUR = 'EUR',
+    GBP = 'GBP',
+    AUD = 'AUD',
+    CHF = 'CHF',
+    JPY = 'JPY',
+    USD = 'USD',
 }
 
 export interface Adresse {
@@ -230,7 +239,7 @@ export class Kunde {
      * @param rabatt Der neue Rabatt
      */
     // eslint-disable-next-line max-params
-    updateStammdaten(
+    update(
         nachname: string,
         email: string,
         kategorie: number,
@@ -241,6 +250,9 @@ export class Kunde {
         geschlecht: Geschlecht,
         familienstand: Familienstand,
         adresse: Adresse,
+        reisen: boolean,
+        lesen: boolean,
+        sport: boolean,
     ) {
         this.nachname = nachname;
         this.email = email;
@@ -252,6 +264,16 @@ export class Kunde {
         this.geschlecht = geschlecht;
         this.familienstand = familienstand;
         this.adresse = adresse;
+        this.resetInteressen();
+        if (reisen) {
+            this.addInteresse('REISEN');
+        }
+        if (lesen) {
+            this.addInteresse('LESEN');
+        }
+        if (sport) {
+            this.addInteresse('SPORT');
+        }
     }
 
     /**
@@ -259,7 +281,8 @@ export class Kunde {
      * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
      */
     hasInteressen() {
-        if (this.interessen === undefined) {
+        /* eslint-disable-next-line no-null/no-null */
+        if (this.interessen === null) {
             return false;
         }
         return this.interessen.length !== 0;
@@ -271,28 +294,11 @@ export class Kunde {
      * @return true, falls es das Schlagwort gibt. Sonst false.
      */
     hasInteresse(interesse: string) {
-        if (this.interessen === undefined) {
+        /* eslint-disable-next-line no-null/no-null */
+        if (this.interessen === null) {
             return false;
         }
         return this.interessen.includes(interesse);
-    }
-
-    /**
-     * Aktualisierung der Schlagw&ouml;rter des Buch-Objekts.
-     * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
-     * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
-     */
-    updateInteressen(reisen: boolean, lesen: boolean, sport: boolean) {
-        this.resetInteressen();
-        if (reisen) {
-            this.addInteresse('REISEN');
-        }
-        if (lesen) {
-            this.addInteresse('LESEN');
-        }
-        if (sport) {
-            this.addInteresse('SPORT');
-        }
     }
 
     /**

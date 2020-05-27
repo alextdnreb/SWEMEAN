@@ -1,0 +1,19 @@
+<div>
+  <div>
+    <mat-form-field appearance="outline" [formGroup]="form">
+      <mat-label>Postleitzahl</mat-label>
+      <input
+        matInput
+        id="plzInput"
+        placeholder="Postleitzahl eingeben"
+        formControlName="plz"
+    /></mat-form-field>
+
+    <div style="color: red;" *ngIf="plz.invalid && plz.touched">
+      <div *ngIf="plz.errors && plz.errors.required">
+        <i class="material-icons">error</i>
+        <span>Eine Postleitzahl muss eingegeben werden.</span>
+      </div>
+    </div>
+  </div>
+</div>
