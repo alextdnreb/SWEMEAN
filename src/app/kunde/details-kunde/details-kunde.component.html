@@ -1,1 +1,41 @@
-Ja servus, hier gibts Details
+<swe-waiting *ngIf="waiting; else details"></swe-waiting>
+<ng-template #details>
+  <section class="mt-1" *ngIf="kunde; else showErrorMsg">
+    <h4>Kunde {{ kunde._id }}:</h4>
+    <swe-details-nachname
+      [form]="form"
+      [currentValue]="kunde.nachname"
+    ></swe-details-nachname>
+    <swe-details-email
+      [form]="form"
+      [currentValue]="kunde.email"
+    ></swe-details-email>
+    <swe-details-kategorie
+      [form]="form"
+      [currentValue]="kunde.kategorie"
+    ></swe-details-kategorie>
+    <swe-details-geburtsdatum
+      [form]="form"
+      [currentValue]="kunde.geburtsdatum"
+    ></swe-details-geburtsdatum>
+    <swe-details-geschlecht
+      [form]="form"
+      [currentValue]="kunde.geschlecht"
+    ></swe-details-geschlecht>
+    <swe-details-familienstand
+      [form]="form"
+      [currentValue]="kunde.familienstand"
+    ></swe-details-familienstand>
+    <swe-details-interessen
+      [form]="form"
+      [currentValue]="kunde.interessen"
+    ></swe-details-interessen>
+    <swe-details-newsletter
+      [form]="form"
+      [currentValue]="kunde.newsletter"
+    ></swe-details-newsletter>
+  </section>
+  <ng-template #showErrorMsg>
+    <swe-error-message [text]="errorMsg"></swe-error-message>
+  </ng-template>
+</ng-template>

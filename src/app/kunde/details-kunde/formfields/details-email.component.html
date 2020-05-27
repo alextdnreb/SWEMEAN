@@ -1,0 +1,26 @@
+<div [class.has-danger]="email.invalid && email.touched">
+  <div>
+    <mat-form-field [formGroup]="form">
+      E-Mail
+      <input
+        matInput
+        id="emailInput"
+        placeholder="Gültige E-mail eingeben"
+        autofocus
+        formControlName="email"
+        [class.border-danger]="email.invalid && email.touched"
+    /></mat-form-field>
+
+    <div *ngIf="email.invalid && email.touched" color="warn">
+      <i class="material-icons">error</i>
+      <div *ngIf="email.errors && email.errors.required">
+        <span>Eine E-Mail muss eingegeben werden.</span>
+      </div>
+      <div *ngIf="email.errors && email.errors.pattern">
+        <span>
+          Die eingegebene E-Mail ist ungültig.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
