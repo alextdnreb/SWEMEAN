@@ -193,9 +193,7 @@ export class KundeService {
     async save(kunde: Kunde) {
         console.log('KundeService.save(): kunde=', kunde);
 
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-        });
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
         // Subscription von RxJS als Promise
         let response;
