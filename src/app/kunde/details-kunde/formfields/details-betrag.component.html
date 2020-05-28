@@ -1,4 +1,4 @@
-<div [class.has-danger]="betrag.invalid && betrag.touched">
+<div>
   <div>
     <mat-form-field appearance="outline" [formGroup]="form">
       <mat-label>Betrag</mat-label>
@@ -8,5 +8,13 @@
         placeholder="Betrag eingeben"
         formControlName="betrag"
     /></mat-form-field>
+  </div>
+  <div style="color: red;" *ngIf="betrag.invalid && betrag.touched">
+    <div *ngIf="betrag.errors && betrag.errors.pattern">
+      <i class="material-icons">error</i>
+      <span>
+        Der eingegebene Betrag ist ungültig.
+      </span>
+    </div>
   </div>
 </div>

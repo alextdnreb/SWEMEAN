@@ -6,6 +6,8 @@ import { FormControl, FormGroup } from '@angular/forms';
     templateUrl: './details-geburtsdatum.component.html',
 })
 export class DetailsGeburtsdatumComponent implements OnInit {
+    readonly maxDate = new Date();
+
     @Input()
     readonly form!: FormGroup;
 

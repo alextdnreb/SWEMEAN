@@ -9,7 +9,6 @@
         placeholder="Nachname eingeben"
         formControlName="nachname"
     /></mat-form-field>
-
     <div style="color: red;" *ngIf="nachname.invalid && nachname.touched">
       <div *ngIf="nachname.errors && nachname.errors.required">
         <i class="material-icons">error</i>
@@ -18,7 +17,8 @@
       <div *ngIf="nachname.errors && nachname.errors.pattern">
         <i class="material-icons">error</i>
         <span>
-          Der eingegebene Nachname ist ungültig.
+          Bei Nachnamen ist nach einem Großbuchstaben mindestens ein
+          Kleinbuchstabe notwendig; Doppelnamen sind möglich.
         </span>
       </div>
     </div>

@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'swe-details-betrag',
     templateUrl: './details-betrag.component.html',
 })
 export class DetailsBetragComponent implements OnInit {
+    private static readonly betragRegex = /^(?:\d*\.\d{1,2}|\d+)$/u;
+
     @Input()
     readonly form!: FormGroup;
 
@@ -23,10 +25,15 @@ export class DetailsBetragComponent implements OnInit {
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.betrag = new FormControl({
-            value: this.currentValue,
-            disabled: this.isDisabled,
-        });
+        this.betrag = new FormControl(
+            {
+                value: this.currentValue,
+                disabled: this.isDisabled,
+            },
+            Validators.compose([
+                Validators.pattern(DetailsBetragComponent.betragRegex),
+            ]),
+        );
         this.form.addControl('betrag', this.betrag);
     }
 }

@@ -99,13 +99,14 @@
                   </a>
                 </td>
               </ng-container>
-              <ng-container matColumnDef="loeschen" *ngIf="isAdmin">
+              <ng-container matColumnDef="loeschen">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
                   <span
                     (click)="onRemove(element)"
                     title="Entfernen"
                     style="cursor: pointer;"
+                    *ngIf="isAdmin"
                   >
                     <i class="material-icons">delete</i>
                   </span>

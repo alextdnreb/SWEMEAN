@@ -14,6 +14,10 @@
         <i class="material-icons">error</i>
         <span>Eine Postleitzahl muss eingegeben werden.</span>
       </div>
+      <div *ngIf="plz.errors && plz.errors.pattern">
+        <i class="material-icons">error</i>
+        <span>Die eingegebene PLZ ist keine gültige deutsche Postleitzahl</span>
+      </div>
     </div>
   </div>
 </div>

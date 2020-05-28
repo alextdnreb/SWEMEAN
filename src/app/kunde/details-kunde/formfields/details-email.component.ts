@@ -6,6 +6,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     templateUrl: './details-email.component.html',
 })
 export class DetailsEmailComponent implements OnInit {
+    /* eslint-disable-next-line max-len, unicorn/no-unsafe-regex */
+    private static readonly mailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/u;
+
     @Input()
     readonly form!: FormGroup;
 
@@ -25,7 +28,10 @@ export class DetailsEmailComponent implements OnInit {
         // siehe formControlName innerhalb @Component({templateUrl: ...})
         this.email = new FormControl(
             { value: this.currentValue, disabled: this.isDisabled },
-            Validators.compose([Validators.required]),
+            Validators.compose([
+                Validators.required,
+                Validators.pattern(DetailsEmailComponent.mailRegex),
+            ]),
         );
         this.form.addControl('email', this.email);
     }
