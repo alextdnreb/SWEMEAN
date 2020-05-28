@@ -6,6 +6,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     templateUrl: './details-plz.component.html',
 })
 export class DetailsPlzComponent implements OnInit {
+    /* eslint-disable-next-line max-len */
+    private static readonly plzRegex = /^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/u;
+
     @Input()
     readonly form!: FormGroup;
 
@@ -25,7 +28,10 @@ export class DetailsPlzComponent implements OnInit {
         // siehe formControlName innerhalb @Component({templateUrl: ...})
         this.plz = new FormControl(
             { value: this.currentValue, disabled: this.isDisabled },
-            Validators.compose([Validators.required]),
+            Validators.compose([
+                Validators.required,
+                Validators.pattern(DetailsPlzComponent.plzRegex),
+            ]),
         );
         this.form.addControl('plz', this.plz);
     }

@@ -6,8 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     templateUrl: './details-nachname.component.html',
 })
 export class DetailsNachnameComponent implements OnInit {
-    /* eslint-disable-next-line max-len*/
-    private static readonly nachnamePattern = /(o'|von|von der|von und zu|van)?[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)/u;
+    /* eslint-disable-next-line max-len, unicorn/no-unsafe-regex */
+    private static readonly nachnamePattern = /(o'|von|von der|von und zu|van)?[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)?/u;
 
     @Input()
     readonly form!: FormGroup;
@@ -28,7 +28,10 @@ export class DetailsNachnameComponent implements OnInit {
         // siehe formControlName innerhalb @Component({templateUrl: ...})
         this.nachname = new FormControl(
             { value: this.currentValue, disabled: this.isDisabled },
-            Validators.compose([Validators.required]),
+            Validators.compose([
+                Validators.required,
+                Validators.pattern(DetailsNachnameComponent.nachnamePattern),
+            ]),
         );
         this.form.addControl('nachname', this.nachname);
     }
