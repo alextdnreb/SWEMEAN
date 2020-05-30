@@ -12,7 +12,7 @@ export class DetailsInteressenComponent implements OnInit {
     readonly form!: FormGroup;
 
     @Input()
-    readonly kunde!: Kunde;
+    readonly kunde!: Kunde | undefined;
 
     @Input()
     readonly isDisabled: boolean;
@@ -26,19 +26,22 @@ export class DetailsInteressenComponent implements OnInit {
     ngOnInit() {
         console.log(
             'DetailsInteressenComponent.ngOnInit(): currentValue=',
-            this.kunde.interessen,
+            this.kunde?.interessen,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
         this.lesen = new FormControl({
-            value: this.kunde.hasInteresse('L'),
+            value:
+                this.kunde === undefined ? false : this.kunde.hasInteresse('L'),
             disabled: this.isDisabled,
         });
         this.reisen = new FormControl({
-            value: this.kunde.hasInteresse('R'),
+            value:
+                this.kunde === undefined ? false : this.kunde.hasInteresse('R'),
             disabled: this.isDisabled,
         });
         this.sport = new FormControl({
-            value: this.kunde.hasInteresse('S'),
+            value:
+                this.kunde === undefined ? false : this.kunde.hasInteresse('S'),
             disabled: this.isDisabled,
         });
         this.form.addControl('lesen', this.lesen);

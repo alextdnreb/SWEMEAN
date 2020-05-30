@@ -86,8 +86,8 @@ export class LoginLogoutComponent implements OnInit, OnDestroy {
      * <code>ngOnInit</code> aufgerufen.
      */
     private subscribeLogin() {
-        const next = (event: boolean) => {
-            if (this.notLoggedIn && !event) {
+        const next = (event: string | undefined) => {
+            if (this.notLoggedIn && event === undefined) {
                 // Noch nicht eingeloggt und ein Login-Event kommt, d.h.
                 // es gab einen Login-Versuch, der aber fehlerhaft (= false) war
                 console.warn('AuthComponent: Falsche Login-Daten', event);
@@ -99,6 +99,11 @@ export class LoginLogoutComponent implements OnInit, OnDestroy {
                 if (!this.dialog.openDialogs.length) {
                     this.openDialog();
                 }
+            } else if (event !== undefined) {
+                this.snackBar.open(`Herzlich Wilkommen ${event}`, 'Schließen', {
+                    duration: 3000,
+                    panelClass: 'swe-success-snackbar',
+                });
             }
             this.notLoggedIn = !event;
             console.log('AuthComponent.notLoggedIn:', this.notLoggedIn);

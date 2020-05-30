@@ -74,7 +74,7 @@ export class CreateKundeComponent implements OnInit {
         this.fertig = true;
         this.showWarning = false;
         await this.router.navigate(['..', id], { relativeTo: this.route });
-        this.snackBar.open('Erstellung erfolgreich', 'Schließen', {
+        this.snackBar.open('Kunde erfolgreich erstellt', 'Schließen', {
             duration: 3000,
             panelClass: 'swe-success-snackbar',
         });

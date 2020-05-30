@@ -327,7 +327,7 @@ export class KundeService {
         }
 
         const data: ChartData = {
-            labels,
+            labels: labels.map(label => `Kategorie ${label}`),
             datasets: [
                 {
                     data: anzahlKunden,
