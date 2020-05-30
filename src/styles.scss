@@ -81,5 +81,11 @@ input:focus {
 }
 
 .swe-label {
-  width: 15%;
+  width: 100px;
+}
+
+mat-radio-button,
+mat-checkbox {
+  width: 100px;
+  display: inline-block;
 }
