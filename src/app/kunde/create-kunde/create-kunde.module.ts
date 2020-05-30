@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -29,6 +30,7 @@ import { Title } from '@angular/platform-browser';
     declarations: [CreateKundeComponent],
     exports: [CreateKundeComponent],
     imports: [
+        MatSnackBarModule,
         FormsModule,
         MatSlideToggleModule,
         MatButtonModule,

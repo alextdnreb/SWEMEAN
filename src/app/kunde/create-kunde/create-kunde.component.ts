@@ -3,6 +3,7 @@ import { Kunde, KundeService, SaveError } from '../shared';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { HttpStatus } from '../../shared';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import type { OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -24,6 +25,7 @@ export class CreateKundeComponent implements OnInit {
         private readonly router: Router,
         private readonly titleService: Title,
         private readonly route: ActivatedRoute,
+        private readonly snackBar: MatSnackBar,
     ) {
         console.log('CreateKundeComponent.constructor()');
         if (router !== undefined) {
@@ -72,7 +74,10 @@ export class CreateKundeComponent implements OnInit {
         this.fertig = true;
         this.showWarning = false;
         await this.router.navigate(['..', id], { relativeTo: this.route });
-
+        this.snackBar.open('Erstellung erfolgreich', 'Schließen', {
+            duration: 3000,
+            panelClass: 'swe-success-snackbar',
+        });
         // damit das (Submit-) Ereignis konsumiert wird und nicht an
         // uebergeordnete Eltern-Komponenten propagiert wird bis zum Refresh
         // der gesamten Seite

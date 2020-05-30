@@ -6,6 +6,7 @@ import { AuthService } from '../../auth/auth.service';
 import { FormGroup } from '@angular/forms';
 import { KundeService } from '../shared/kunde.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import type { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
@@ -35,6 +36,7 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
         private readonly titleService: Title,
         private readonly route: ActivatedRoute,
         private readonly authService: AuthService,
+        private readonly snackBar: MatSnackBar,
     ) {
         console.log('DetailsKundeComponent.constructor()');
     }
@@ -59,6 +61,7 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
             this.form.disable();
         }
     }
+    /* eslint-disable-next-line max-lines-per-function */
     async onUpdate() {
         if (this.form.pristine) {
             console.log(
@@ -99,6 +102,10 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
             );
             this.isUpdate = false;
             this.form.disable();
+            this.snackBar.open('Ändern erfolgreich', 'Schließen', {
+                duration: 3000,
+                panelClass: 'swe-success-snackbar',
+            });
         };
 
         const errorFn: (
@@ -109,7 +116,6 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
                 `UpdateStammdatenComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
                 errors,
             );
-            // TODO Fehlermeldung anzeigen
         };
 
         await this.kundeService.update(this.kunde, successFn, errorFn);
