@@ -1,7 +1,7 @@
 <div>
   <div>
     <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>Username</mat-label>
+      <mat-label>Benutzername</mat-label>
       <input
         matInput
         id="usernameInput"
@@ -12,7 +12,7 @@
     <div style="color: red;" *ngIf="username.invalid && username.touched">
       <div *ngIf="username.errors && username.errors.required">
         <i class="material-icons">error</i>
-        <span>Eine Username muss eingegeben werden.</span>
+        <span>Ein Benutzername muss eingegeben werden.</span>
       </div>
     </div>
   </div>

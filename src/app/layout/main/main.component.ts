@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
     // Platzhalter fuer den Austausch der HTML-Templates (= Fragmente)
     // beim Routing
     template: `
-        <main>
+        <main style="background-color: #f5f5f7;">
             <div class="swe-main"><router-outlet></router-outlet></div>
         </main>
     `,

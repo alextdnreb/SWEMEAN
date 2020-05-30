@@ -1,9 +1,9 @@
-import { HOME_PATH, HttpStatus } from '../../shared';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Kunde, KundeService, SaveError } from '../shared';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { HttpStatus } from '../../shared';
 import type { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -18,11 +18,12 @@ export class CreateKundeComponent implements OnInit {
     fertig = false;
 
     errorMsg: string | undefined = undefined;
-
+    /* eslint-disable-next-line max-params */
     constructor(
         private readonly kundeService: KundeService,
         private readonly router: Router,
         private readonly titleService: Title,
+        private readonly route: ActivatedRoute,
     ) {
         console.log('CreateKundeComponent.constructor()');
         if (router !== undefined) {
@@ -59,9 +60,9 @@ export class CreateKundeComponent implements OnInit {
 
         const neuerKunde = Kunde.fromForm(this.form.value);
         console.log('CreateKundeComponent.onSave(): neuerKunde=', neuerKunde);
-
+        let id: string | undefined;
         try {
-            const id = await this.kundeService.save(neuerKunde);
+            id = await this.kundeService.save(neuerKunde);
             console.log(`CreateKundeComponent.onSave(): id=${id}`);
         } catch (err) {
             this.handleError(err);
@@ -70,7 +71,7 @@ export class CreateKundeComponent implements OnInit {
 
         this.fertig = true;
         this.showWarning = false;
-        await this.router.navigate([HOME_PATH]);
+        await this.router.navigate(['..', id], { relativeTo: this.route });
 
         // damit das (Submit-) Ereignis konsumiert wird und nicht an
         // uebergeordnete Eltern-Komponenten propagiert wird bis zum Refresh

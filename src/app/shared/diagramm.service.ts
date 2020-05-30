@@ -66,6 +66,30 @@ export class DiagrammService {
             highlight: '#FFC870',
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(3, {
+            color: '#1A26C4',
+            highlight: '#1E2CE3',
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(4, {
+            color: '#C019C3',
+            highlight: '#E81EEC',
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(5, {
+            color: '#18BBBF',
+            highlight: '#20E6EA',
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(6, {
+            color: '#C9C319',
+            highlight: '#E8E11F',
+        });
+
         console.log(
             'DiagrammService.constructor(): backgroundColors=',
             this.backgroundColors,
@@ -112,7 +136,7 @@ export class DiagrammService {
      * @return String mit dem Hex-Code der Farbe.
      */
     getBackgroundColor(idx: number) {
-        const colorHighlight = this.backgroundColors.get(idx % 3); // eslint-disable-line @typescript-eslint/no-magic-numbers
+        const colorHighlight = this.backgroundColors.get(idx % 7); // eslint-disable-line @typescript-eslint/no-magic-numbers
         return colorHighlight === undefined
             ? DiagrammService.DEFAULT_COLOR
             : colorHighlight.color;

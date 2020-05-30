@@ -1,4 +1,4 @@
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnDestroy } from '@angular/core';
 import { FindError, Kunde } from '../shared';
 import { HOME_PATH, HttpStatus } from '../../shared';
@@ -23,6 +23,8 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
 
     readonly form = new FormGroup({});
 
+    isUpdate: boolean;
+
     isAdmin!: boolean;
 
     private idParamSubscription!: Subscription;
@@ -32,7 +34,6 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
         private readonly kundeService: KundeService,
         private readonly titleService: Title,
         private readonly route: ActivatedRoute,
-        private readonly router: Router,
         private readonly authService: AuthService,
     ) {
         console.log('DetailsKundeComponent.constructor()');
@@ -92,12 +93,12 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
             this.form.value.sport,
         );
         console.log('kunde=', this.kunde);
-
-        const successFn = async () => {
+        const successFn = () => {
             console.log(
                 `UpdateStammdaten.onUpdate(): successFn: path: ${HOME_PATH}`,
             );
-            await this.router.navigate([HOME_PATH]);
+            this.isUpdate = false;
+            this.form.disable();
         };
 
         const errorFn: (
