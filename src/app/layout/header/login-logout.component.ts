@@ -42,8 +42,8 @@ export class LoginLogoutComponent implements OnInit, OnDestroy {
     constructor(
         private readonly authService: AuthService,
         private readonly router: Router,
-        public dialog: MatDialog,
-        private snackBar: MatSnackBar,
+        public readonly dialog: MatDialog,
+        private readonly snackBar: MatSnackBar,
     ) {
         console.log('LoginLogoutComponent.constructor()');
     }
