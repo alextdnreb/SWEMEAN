@@ -21,8 +21,7 @@
 <section aria-label="Suchergebnis">
   <mat-card class="example-card">
     <mat-card-content>
-      <mat-card-title>Suchergebnis</mat-card-title>
-      <mat-card-subtitle>f&uuml;r Kunden</mat-card-subtitle>
+      <h1 *ngIf="!waiting" class="swe-headline">Suchergebnis</h1>
 
       <swe-waiting *ngIf="waiting; else suchergebnis"></swe-waiting>
 
