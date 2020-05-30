@@ -54,6 +54,7 @@ import { Title } from '@angular/platform-browser';
         DetailsPlzModule,
         CreateUsernameModule,
         CreatePasswordModule,
+        DetailsInteressenModule,
     ],
     providers: [Title],
 })

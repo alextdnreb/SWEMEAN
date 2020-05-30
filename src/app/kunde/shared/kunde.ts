@@ -189,13 +189,13 @@ export class Kunde {
         console.log('Kunde.fromForm(): kundeForm=', kundeForm);
         const interessen: Array<string> = [];
         if (kundeForm.reisen === true) {
-            interessen.push('REISEN');
+            interessen.push('R');
         }
         if (kundeForm.lesen === true) {
-            interessen.push('INTERESSEN');
+            interessen.push('L');
         }
         if (kundeForm.sport === true) {
-            interessen.push('SPORT');
+            interessen.push('S');
         }
 
         const kunde = new Kunde(
