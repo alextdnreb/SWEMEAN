@@ -23,6 +23,8 @@
     <mat-card-content>
       <h1 *ngIf="!waiting" class="swe-headline">Suchergebnis</h1>
 
+      <hr style="width: 80%;" />
+
       <swe-waiting *ngIf="waiting; else suchergebnis"></swe-waiting>
 
       <ng-template #suchergebnis>
