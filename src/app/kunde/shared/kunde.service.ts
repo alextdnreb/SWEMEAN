@@ -242,8 +242,8 @@ export class KundeService {
             console.error(`Keine Versionsnummer fuer den Kunden ${kunde._id}`);
             return;
         }
-        const successFnPut = async () => {
-            await successFn();
+        const successFnPut = () => {
+            successFn();
             // Wenn Update erfolgreich war, dann wurde serverseitig die Versionsnr erhoeht
             if (kunde.version === undefined) {
                 kunde.version = 1;
@@ -279,7 +279,7 @@ export class KundeService {
             return;
         }
 
-        await successFnPut();
+        successFnPut();
     }
 
     /**
