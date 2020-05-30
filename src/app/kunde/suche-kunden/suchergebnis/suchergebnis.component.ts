@@ -18,6 +18,7 @@
 // Bereitgestellt durch das RouterModule
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { FindError } from '../../shared';
 import { HttpStatus } from '../../../shared';
@@ -52,18 +53,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
     @Input()
     suchkriterien: Suchkriterien | undefined;
 
-    displayedColumns: Array<string> = [
-        'position',
-        'ID',
-        'nachname',
-        'email',
-        'interessen',
-        'kategorie',
-        'ort',
-        'geschlecht',
-        'details',
-        'loeschen',
-    ];
+    displayedColumns: Array<string>;
 
     waiting = false;
 
@@ -78,8 +68,25 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         private readonly route: ActivatedRoute,
         private readonly router: Router,
         private readonly authService: AuthService,
+        breakpointObserver: BreakpointObserver,
     ) {
-        console.log('SuchergebnisComponent.constructor()');
+        console.log('SuchErgebnisComponent.constructor()');
+        breakpointObserver.observe(['(max-width: 650px)']).subscribe(result => {
+            this.displayedColumns = result.matches
+                ? ['email', 'nachname', 'details', 'loeschen']
+                : [
+                      'position',
+                      'ID',
+                      'nachname',
+                      'email',
+                      'interessen',
+                      'kategorie',
+                      'ort',
+                      'geschlecht',
+                      'details',
+                      'loeschen',
+                  ];
+        });
     }
 
     async ngOnChanges(changes: SimpleChanges) {
