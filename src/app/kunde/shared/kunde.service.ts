@@ -1,5 +1,11 @@
 /* eslint-disable max-statements, no-null/no-null, max-lines */
-import { Adresse, Kunde, KundeServer } from './kunde';
+import {
+    Adresse,
+    Kunde,
+    KundeServer,
+    MAX_KATEGORIE,
+    MIN_KATEGORIE,
+} from './kunde';
 import {
     ChartColor,
     ChartConfiguration,
@@ -223,7 +229,7 @@ export class KundeService {
      */
     async update(
         kunde: Kunde,
-        successFn: () => Promise<void>,
+        successFn: () => void,
         errorFn: (
             status: number,
             errors: { [s: string]: unknown } | undefined,
@@ -299,12 +305,18 @@ export class KundeService {
             k => k._id !== undefined && k.kategorie !== undefined,
         );
 
-        const labels = kundenGueltig
-            .map(k => k._id)
-            .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
+        const labels: Array<number> = [];
+        for (let i = MIN_KATEGORIE; i <= MAX_KATEGORIE; i += 1) {
+            labels.push(i);
+        }
         console.log('KundeService.createPieChart(): labels:', labels);
 
         const kategorien = kundenGueltig.map(k => k.kategorie);
+        const anzahlKunden = labels.map(
+            kategorie =>
+                kundenGueltig.filter(kunde => kunde.kategorie === kategorie)
+                    .length,
+        );
         const backgroundColor: Array<ChartColor> = [];
         const hoverBackgroundColor: Array<ChartColor> = [];
         for (let i = 0; i < kategorien.length; i++) {
@@ -318,7 +330,7 @@ export class KundeService {
             labels,
             datasets: [
                 {
-                    data: kategorien,
+                    data: anzahlKunden,
                     backgroundColor,
                     hoverBackgroundColor,
                 },
@@ -336,18 +348,29 @@ export class KundeService {
         const kundenGueltig = kunden.filter(
             k => k._id !== undefined && k.kategorie !== undefined,
         );
-
-        const labels = kundenGueltig
-            .map(k => k._id)
-            .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
+        const labels: Array<number> = [];
+        for (let i = MIN_KATEGORIE; i <= MAX_KATEGORIE; i += 1) {
+            labels.push(i);
+        }
         console.log('KundeService.createBarChart(): labels:', labels);
 
-        const data = kundenGueltig.map(k => k.kategorie);
-        const datasets: Array<ChartDataSets> = [{ label: 'Kategorie', data }];
+        const data = labels.map(
+            kategorie =>
+                kundenGueltig.filter(kunde => kunde.kategorie === kategorie)
+                    .length,
+        );
+        const datasets: Array<ChartDataSets> = [
+            { label: 'Anzahl Kunden', data },
+        ];
 
         const config: ChartConfiguration = {
             type: 'bar',
             data: { labels, datasets },
+            options: {
+                scales: {
+                    yAxes: [{ ticks: { stepSize: 1, beginAtZero: true } }],
+                },
+            },
         };
         return this.diagrammService.createChart(chartElement, config);
     }

@@ -98,6 +98,9 @@ export interface Adresse {
     ort: string;
 }
 
+export const MIN_KATEGORIE = 0;
+export const MAX_KATEGORIE = 9;
+
 export class Kunde {
     private static readonly SPACE = 2;
 

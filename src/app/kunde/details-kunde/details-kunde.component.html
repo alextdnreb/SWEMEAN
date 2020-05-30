@@ -3,7 +3,7 @@
   <mat-card *ngIf="kunde; else showErrorMsg" style="text-align: center;">
     <mat-card-content>
       <h1 class="swe-headline">Details</h1>
-      <mat-slide-toggle (change)="onChange($event)"
+      <mat-slide-toggle (change)="onChange($event)" [(ngModel)]="isUpdate"
         >Bearbeiten</mat-slide-toggle
       >
       <hr style="width: 80%;" />
@@ -85,7 +85,7 @@
         [disabled]="form.pristine || form.invalid || form.disabled"
       >
         <i class="material-icons">check</i>
-        <span>Stammdaten aktualisieren</span>
+        <span>Kunden aktualisieren</span>
       </button>
     </mat-card-content>
   </mat-card>

@@ -4,9 +4,6 @@
     ><i class="material-icons">person_add</i></a
   >
   <swe-window-controls></swe-window-controls>
-  <swe-login-logout
-    [ngStyle]="{ float: preloaded ? 'none' : 'right' }"
-  ></swe-login-logout>
   <a [matMenuTriggerFor]="diagrams" class="swe-nav-link" *ngIf="isAdmin">
     <i class="material-icons">keyboard_arrow_down</i>
   </a>
@@ -15,9 +12,12 @@
     <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
     <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
   </mat-menu>
-  <a routerLink="/kunden/suche" class="swe-nav-link"
+  <a *ngIf="isAdmin" routerLink="/kunden/suche" class="swe-nav-link"
     ><i class="material-icons">search</i></a
   >
+  <swe-login-logout
+    [ngStyle]="{ float: preloaded ? 'none' : 'right' }"
+  ></swe-login-logout>
 </div>
 <div class="swe-mobile-menu">
   <button class="swe-burger-menu" mat-button [matMenuTriggerFor]="menu">
