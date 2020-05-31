@@ -1,1 +1,64 @@
-<div>test</div>
+<mat-card class="home-card">
+  <mat-card-header>
+    <div mat-card-avatar class="card-header-image">
+      <mat-icon [inline]="true">info</mat-icon>
+    </div>
+    <mat-card-title>Kundenverwaltung</mat-card-title>
+    <mat-card-subtitle
+      >Verwalte schnell und zuverl&auml;ssig deine Kundendaten
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+
+<a class="home-card" (click)="openURL('/suche')">
+  <mat-card class="home-card">
+    <mat-card-header>
+      <div mat-card-avatar class="card-header-image">
+        <mat-icon [inline]="true">search</mat-icon>
+      </div>
+      <mat-card-title>Suche Kunden</mat-card-title>
+      <mat-card-subtitle>Sucht einen oder mehrere Kunden in der Datenbank.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button>Kunde suchen</button>
+    </mat-card-actions>
+  </mat-card>
+</a>
+
+<a class="home-card" (click)="openURL('/create')">
+  <mat-card class="home-card">
+    <mat-card-header>
+      <div mat-card-avatar class="card-header-image">
+        <mat-icon [inline]="true">person_add</mat-icon>
+      </div>
+      <mat-card-title>Erstelle Kunden</mat-card-title>
+      <mat-card-subtitle>Erstellt einen neuen Kunden.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button>Kunde hinzuf&uuml;gen</button>
+    </mat-card-actions>
+  </mat-card>
+</a>
+
+<mat-card class="home-card">
+  <mat-card-header>
+    <div mat-card-avatar class="card-header-image">
+      <mat-icon [inline]="true">show_chart</mat-icon>
+    </div>
+    <mat-card-title>Diagramme</mat-card-title>
+    <mat-card-subtitle>
+      Zeigt Diagramme zu den Kategorien an.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <a (click)="openURL('/kunden/liniendiagramm')">
+      <button mat-button>Liniendiagramm</button>
+    </a>
+    <a (click)="openURL('/kunden/tortendiagramm')">
+      <button mat-button>Tortendiagramm</button>
+    </a>
+    <a (click)="openURL('/kunden/balkendiagramm')">
+      <button mat-button>Balkendiagramm</button>
+    </a>
+  </mat-card-actions>
+</mat-card>
