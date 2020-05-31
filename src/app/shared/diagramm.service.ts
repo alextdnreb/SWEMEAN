@@ -148,7 +148,7 @@ export class DiagrammService {
      * @return String mit dem Hex-Code dieser Farbe.
      */
     getHoverBackgroundColor(idx: number) {
-        const backgroundColor = this.backgroundColors.get(idx % 3); // eslint-disable-line @typescript-eslint/no-magic-numbers
+        const backgroundColor = this.backgroundColors.get(idx % 7); // eslint-disable-line @typescript-eslint/no-magic-numbers
         return backgroundColor === undefined
             ? DiagrammService.DEFAULT_HIGHLIGHT_COLOR
             : backgroundColor.highlight;
