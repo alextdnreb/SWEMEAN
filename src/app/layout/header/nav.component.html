@@ -5,7 +5,7 @@
   >
   <swe-window-controls></swe-window-controls>
   <a [matMenuTriggerFor]="diagrams" class="swe-nav-link" *ngIf="isAdmin">
-    <i class="material-icons">keyboard_arrow_down</i>
+    <i class="material-icons">bar_chart</i>
   </a>
   <mat-menu #diagrams="matMenu">
     <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
@@ -34,7 +34,7 @@
       ><i class="material-icons swe-mobile-menu-icon">person_add</i>Erstellen</a
     >
     <span mat-menu-item [matMenuTriggerFor]="diagramme">
-      <i class="material-icons swe-mobile-menu-icon">show_chart</i>Diagramme
+      <i class="material-icons swe-mobile-menu-icon">bar_chart</i>Diagramme
     </span>
 
     <span mat-menu-item><swe-login-logout></swe-login-logout></span>
