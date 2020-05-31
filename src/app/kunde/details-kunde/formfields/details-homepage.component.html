@@ -4,8 +4,12 @@
     matInput
     id="homepageInput"
     placeholder="Homepage eingeben"
-    formControlName="homepage" /></mat-form-field
-><mat-error *ngIf="homepage.invalid && homepage.touched"
-  ><i class="material-icons">error</i>Die eingegebene Homepage ist
-  ungültig.</mat-error
+    formControlName="homepage"
+  /><mat-error *ngIf="homepage.invalid && homepage.touched"
+    ><i class="material-icons">error</i>Die Syntax der Homepage muss dem in
+    <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC2396</a> definierten
+    Format entsprechen. URLs, die nach der Spezifikation
+    <a href="https://www.ietf.org/rfc/rfc2732.txt">RFC2732</a> gültig sind,
+    werden auch unterstützt.</mat-error
+  ></mat-form-field
 >

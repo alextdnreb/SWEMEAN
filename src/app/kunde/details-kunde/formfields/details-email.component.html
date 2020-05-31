@@ -10,7 +10,8 @@
     ><i class="material-icons">error</i>Eine E-Mail muss eingegeben
     werden.</mat-error
   ><mat-error *ngIf="email.errors && email.errors.pattern"
-    ><i class="material-icons">error</i>Die eingegebene E-Mail ist
-    ungültig.</mat-error
+    ><i class="material-icons">error</i>Die E-Mail muss dem in
+    <a href="http://www.faqs.org/rfcs/rfc2822.html">RFC2822</a> spezifizierten
+    Format entsprechen.</mat-error
   ></mat-form-field
 >
