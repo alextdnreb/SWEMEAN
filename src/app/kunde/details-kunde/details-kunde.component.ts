@@ -64,15 +64,13 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
     /* eslint-disable-next-line max-lines-per-function */
     async onUpdate() {
         if (this.form.pristine) {
-            console.log(
-                'UpdateStammdatenComponent.onUpdate(): keine Aenderungen',
-            );
+            console.log('DetailsKundeComponent.onUpdate(): keine Aenderungen');
             return;
         }
 
         if (this.kunde === undefined) {
             console.error(
-                'UpdateStammdatenComponent.onUpdate(): buch === undefined',
+                'DetailsKundeComponent.onUpdate(): buch === undefined',
             );
             return;
         }

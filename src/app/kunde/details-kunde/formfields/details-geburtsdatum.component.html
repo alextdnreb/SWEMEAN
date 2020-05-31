@@ -3,11 +3,15 @@
   <input
     id="geburtsdatumInput"
     matInput
-    placeholder="Geburtsdatum auswählen"
+    placeholder="01.1.1901"
     formControlName="geburtsdatum"
     [matDatepicker]="picker"
     [max]="maxDate"
   />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
+  <mat-error *ngIf="geburtsdatum.errors && geburtsdatum.errors.pattern"
+    ><i class="material-icons">error</i>Das Datum muss dem deutschen
+    Datumsformat dd.mm.YYY entsprechen.</mat-error
+  >
 </mat-form-field>

@@ -172,7 +172,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
             case 'W':
                 return 'weiblich';
             default:
-                return 'unbekannt';
+                return 'divers';
         }
     }
 
