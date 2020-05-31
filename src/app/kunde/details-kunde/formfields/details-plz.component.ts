@@ -6,8 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     templateUrl: './details-plz.component.html',
 })
 export class DetailsPlzComponent implements OnInit {
-    /* eslint-disable-next-line max-len */
-    private static readonly plzRegex = /^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/u;
+    private static readonly plzRegex = /\d{5}/u;
 
     @Input()
     readonly form!: FormGroup;

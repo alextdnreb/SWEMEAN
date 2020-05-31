@@ -94,35 +94,38 @@ mat-checkbox {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d1d1d1;
+  background: #000000;
   border: 0px none #ffffff;
-  border-radius: 50px;
+  border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #ffffff;
+  background: #000000;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #f5f5f7;
   border: 0px none #ffffff;
-  border-radius: 19px;
+  border-radius: 0px;
 }
 ::-webkit-scrollbar-track:hover {
-  background: #000000;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-track:active {
-  background: #000000;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+.mat-form-field-subscript-wrapper {
+  position: relative !important;
 }

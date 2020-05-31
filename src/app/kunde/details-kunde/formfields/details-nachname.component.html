@@ -1,26 +1,17 @@
-<div>
-  <div>
-    <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>Nachname</mat-label>
-      <input
-        class="swe-input"
-        matInput
-        id="nachnameInput"
-        placeholder="Nachname eingeben"
-        formControlName="nachname"
-    /></mat-form-field>
-    <div style="color: red;" *ngIf="nachname.invalid && nachname.touched">
-      <div *ngIf="nachname.errors && nachname.errors.required">
-        <i class="material-icons">error</i>
-        <span>Ein Nachname muss eingegeben werden.</span>
-      </div>
-      <div *ngIf="nachname.errors && nachname.errors.pattern">
-        <i class="material-icons">error</i>
-        <span>
-          Bei Nachnamen ist nach einem Großbuchstaben mindestens ein
-          Kleinbuchstabe notwendig; Doppelnamen sind möglich.
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label>Nachname</mat-label>
+  <input
+    class="swe-input"
+    matInput
+    id="nachnameInput"
+    placeholder="Nachname eingeben"
+    formControlName="nachname"
+  /><mat-error *ngIf="nachname.errors && nachname.errors.required"
+    ><i class="material-icons">error</i>Ein Nachname muss eingegeben
+    werden.</mat-error
+  ><mat-error
+    ><i class="material-icons">error</i>Bei Nachnamen ist nach einem
+    Großbuchstaben mindestens ein Kleinbuchstabe notwendig; Doppelnamen sind
+    möglich.</mat-error
+  ></mat-form-field
+>

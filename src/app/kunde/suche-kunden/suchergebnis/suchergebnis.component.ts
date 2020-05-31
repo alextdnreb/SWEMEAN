@@ -71,7 +71,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         breakpointObserver: BreakpointObserver,
     ) {
         console.log('SuchErgebnisComponent.constructor()');
-        breakpointObserver.observe(['(max-width: 650px)']).subscribe(result => {
+        breakpointObserver.observe(['(max-width: 690px)']).subscribe(result => {
             this.displayedColumns = result.matches
                 ? ['email', 'nachname', 'details', 'loeschen']
                 : [

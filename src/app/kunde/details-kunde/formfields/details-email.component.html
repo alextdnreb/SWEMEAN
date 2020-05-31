@@ -1,25 +1,16 @@
-<div>
-  <div>
-    <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>E-Mail</mat-label>
-      <input
-        matInput
-        id="emailInput"
-        placeholder="E-Mail eingeben"
-        formControlName="email"
-    /></mat-form-field>
-
-    <div style="color: red;" *ngIf="email.invalid && email.touched">
-      <div *ngIf="email.errors && email.errors.required">
-        <i class="material-icons">error</i>
-        <span>Eine E-Mail muss eingegeben werden.</span>
-      </div>
-      <div *ngIf="email.errors && email.errors.pattern">
-        <i class="material-icons">error</i>
-        <span>
-          Die eingegebene E-Mail ist ungültig.
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label>E-Mail</mat-label>
+  <input
+    matInput
+    id="emailInput"
+    placeholder="E-Mail eingeben"
+    formControlName="email"
+  />
+  <mat-error *ngIf="email.errors && email.errors.required"
+    ><i class="material-icons">error</i>Eine E-Mail muss eingegeben
+    werden.</mat-error
+  ><mat-error *ngIf="email.errors && email.errors.pattern"
+    ><i class="material-icons">error</i>Die eingegebene E-Mail ist
+    ungültig.</mat-error
+  ></mat-form-field
+>
