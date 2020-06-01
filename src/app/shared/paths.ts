@@ -3,7 +3,7 @@ export const HOME_PATH = 'home';
 const SCHEME = 'https';
 const PORT = 443;
 const SERVERNAME = 'localhost';
-const BASE_PATH = '/rest/api';
+const BASE_PATH = '/rest';
 
 // CORS statt Proxy:
 // const SCHEME = 'https'
@@ -15,3 +15,8 @@ const BASE_PATH = '/rest/api';
  * Basis-URI fuer den REST-Server
  */
 export const BASE_URI = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`;
+
+/**
+ * Pfad beim REST-Server fuer buecher
+ */
+export const BUECHER_PATH_REST = 'buecher';

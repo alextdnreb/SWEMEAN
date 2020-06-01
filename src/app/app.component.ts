@@ -1,9 +1,6 @@
 // "core" enthaelt Funktionalitaet, damit die Webanwendung im Browser laeuft
 import { Component, VERSION } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { Suchkriterien } from './kunde/shared/kunde.service';
-
 @Component({
     selector: 'swe-root',
 
@@ -11,10 +8,6 @@ import { Suchkriterien } from './kunde/shared/kunde.service';
 })
 export class AppComponent {
     title = 'acme';
-
-    readonly suchkriterien: Subject<Suchkriterien> = new Subject<
-        Suchkriterien
-    >();
 
     constructor() {
         console.log('AppComponent.constructor()');
@@ -42,9 +35,5 @@ export class AppComponent {
             return;
         }
         console.info('ES 2020 wird durch den Webbrowser unterstuetzt.');
-    }
-
-    onFind(suchkriterien: Suchkriterien) {
-        this.suchkriterien.next(suchkriterien);
     }
 }

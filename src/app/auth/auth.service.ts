@@ -29,7 +29,7 @@ export const ROLLE_ADMIN = 'ROLE_ADMIN';
 export class AuthService {
     // Subject statt Observable:
     // in login() und logout() wird Subject.next() aufgerufen
-    private readonly _isLoggedInSubject = new Subject<string | undefined>();
+    private readonly _isLoggedInSubject = new Subject<boolean>();
 
     private readonly _rollenSubject = new Subject<Array<string>>();
 
@@ -54,10 +54,10 @@ export class AuthService {
             // this.basicAuthService.login(username, password)
             rollen = await this.basicAuthService.login(username, password);
             console.log('AuthService.login()', rollen);
-            this.isLoggedInSubject.next(username);
+            this.isLoggedInSubject.next(true);
         } catch (err) {
             console.warn('AuthService.login(): Exception', err);
-            this.isLoggedInSubject.next(undefined);
+            this.isLoggedInSubject.next(false);
         }
 
         this.rollenSubject.next(rollen);
@@ -69,7 +69,7 @@ export class AuthService {
     logout() {
         console.warn('AuthService.logout()');
         this.cookieService.deleteAuthorization();
-        this.isLoggedInSubject.next(undefined);
+        this.isLoggedInSubject.next(false);
         this.rollenSubject.next([]);
     }
 

@@ -41,54 +41,8 @@ body {
 .swe-error-snackbar {
   z-index: 1001;
   background-color: red !important;
-  color: #f5f5f7 !important;
-}
-.swe-success-snackbar {
-  background-color: #28a745;
-  color: #f5f5f7;
-}
-.swe-success-snackbar button {
-  color: #f5f5f7;
-}
-.swe-error-snackbar button {
-  color: #f5f5f7 !important;
-}
-
-@media only screen and (min-width: 601px) {
-  .swe-nav-link {
-    color: #f5f5f7;
-    cursor: pointer;
-    padding: 0 10px;
-    -webkit-user-select: auto;
-    -webkit-app-region: no-drag;
-  }
-}
-
-a.swe-nav-link:hover {
   color: white !important;
 }
-
-input:active,
-input:focus {
-  border: none;
-  outline: none;
-}
-
-.swe-headline {
-  text-align: center;
-  font-size: 40px !important;
-}
-
-.mat-form-field {
-  width: 80%;
-}
-
-.swe-label {
-  width: 100px;
-}
-
-mat-radio-button,
-mat-checkbox {
-  width: 100px;
-  display: inline-block;
+.swe-error-snackbar button {
+  color: white !important;
 }

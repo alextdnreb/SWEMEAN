@@ -3,11 +3,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './layout/header/header.module';
 import { HomeModule } from './home/home.module';
-import { KundeModule } from './kunde/kunde.module';
 import { MainModule } from './layout/main/main.module';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { authInterceptorProviders } from './auth/auth.interceptor';
 import { environment } from '../environments/environment';
 
 // https://angular.io/docs/ts/latest/guide/ngmodule.html
@@ -39,13 +37,10 @@ import { environment } from '../environments/environment';
         BrowserAnimationsModule,
 
         AppRoutingModule,
-        KundeModule,
         HomeModule,
         HeaderModule,
         MainModule,
     ],
-
-    providers: [authInterceptorProviders],
     // Nur das Rootmodul hat die Property "bootstrap", um die
     // Einstiegskomponente zu deklarieren
     // https://angular.io/guide/entry-components

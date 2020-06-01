@@ -63,10 +63,9 @@ export class BasicAuthService {
 
         let response: Response | undefined;
         try {
-            response = await fetch(request, { credentials: 'omit' });
+            response = await fetch(request);
             // Optional catch binding parameters
-        } catch (err) {
-            console.log(err);
+        } catch {
             console.error(
                 'BasicAuthService.login(): Kommunikationsfehler mit d. Appserver',
             );
@@ -82,8 +81,8 @@ export class BasicAuthService {
         if (status !== HttpStatus.OK) {
             return Promise.reject(new Error(response.statusText));
         }
-        const json = await response.json();
 
+        const json = await response.json();
         console.log('BasicAuthService.login(): json', json);
         // Array von Strings als 1 String
         const roles: string = json.join();

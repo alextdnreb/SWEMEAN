@@ -14,9 +14,8 @@ import { Subscription } from 'rxjs';
 })
 export class NavComponent implements OnInit, OnDestroy {
     isAdmin!: boolean;
-    preloaded: any | undefined;
-    private isAdminSubscription!: Subscription;
 
+    private isAdminSubscription!: Subscription;
     constructor(
         public dialog: MatDialog,
         private readonly authService: AuthService,
@@ -28,11 +27,6 @@ export class NavComponent implements OnInit, OnDestroy {
         this.isAdmin = this.authService.isAdmin;
 
         this.isAdminSubscription = this.subscribeIsAdmin();
-
-        this.preloaded =
-            typeof window.preloaded === 'undefined'
-                ? undefined
-                : window.preloaded;
     }
 
     ngOnDestroy() {
