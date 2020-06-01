@@ -327,7 +327,7 @@ export class KundeService {
         }
 
         const data: ChartData = {
-            labels: labels.map(label => `Kategorie ${label}`),
+            labels: labels.map(label => `# Kunden Kategorie ${label}`),
             datasets: [
                 {
                     data: anzahlKunden,
@@ -340,7 +340,7 @@ export class KundeService {
         const config: ChartConfiguration = { type: 'pie', data };
         this.diagrammService.createChart(chartElement, config);
     }
-
+    /* eslint-disable-next-line max-lines-per-function */
     async createBarChart(chartElement: HTMLCanvasElement) {
         console.log('KundeService.createBarChart()');
         const kunden = await this.find();
@@ -352,6 +352,15 @@ export class KundeService {
         for (let i = MIN_KATEGORIE; i <= MAX_KATEGORIE; i += 1) {
             labels.push(i);
         }
+
+        const backgroundColor: Array<ChartColor> = [];
+        const hoverBackgroundColor: Array<ChartColor> = [];
+        for (let i = 0; i < labels.length; i++) {
+            backgroundColor.push(this.diagrammService.getBackgroundColor(i));
+            hoverBackgroundColor.push(
+                this.diagrammService.getHoverBackgroundColor(i),
+            );
+        }
         console.log('KundeService.createBarChart(): labels:', labels);
 
         const data = labels.map(
@@ -360,15 +369,39 @@ export class KundeService {
                     .length,
         );
         const datasets: Array<ChartDataSets> = [
-            { label: 'Anzahl Kunden', data },
+            {
+                label: 'Anzahl Kunden',
+                data,
+                backgroundColor,
+                hoverBackgroundColor,
+            },
         ];
 
         const config: ChartConfiguration = {
             type: 'bar',
             data: { labels, datasets },
             options: {
+                legend: {
+                    display: false,
+                },
                 scales: {
-                    yAxes: [{ ticks: { stepSize: 1, beginAtZero: true } }],
+                    yAxes: [
+                        {
+                            ticks: { stepSize: 1, beginAtZero: true },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Anzahl Kunden',
+                            },
+                        },
+                    ],
+                    xAxes: [
+                        {
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Kategorie',
+                            },
+                        },
+                    ],
                 },
             },
         };
