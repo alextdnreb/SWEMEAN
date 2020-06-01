@@ -1,0 +1,50 @@
+<!--
+    Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--
+    Bootstrap:
+        (xs):    -  480px ("extra small")
+        sm:      -  767px ("small")
+        md:  768 -  991px ("medium")
+        lg:  992 - 1199px ("large")
+        xl: 1200 px       ("extra large")
+    CSS-Klassen von Bootstrap:
+        card-..., form-..., row, btn, bg-primary, ...
+        https://getbootstrap.com/docs/4.0/components/forms
+-->
+
+<div>
+  <mat-form-field appearance="outline">
+    <mat-label>Ort</mat-label>
+    <input
+      matInput
+      id="ortInput"
+      placeholder="Den Ortnamen eingeben"
+      [(ngModel)]="ort"
+      name="ort"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>PLZ</mat-label>
+    <input
+      matInput
+      id="plzInput"
+      placeholder="Die Postleitzahl eingeben"
+      [(ngModel)]="plz"
+      name="plz"
+    />
+  </mat-form-field>
+</div>

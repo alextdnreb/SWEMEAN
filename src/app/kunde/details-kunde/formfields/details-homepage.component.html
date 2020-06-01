@@ -1,0 +1,20 @@
+<div>
+  <div>
+    <mat-form-field appearance="outline" [formGroup]="form">
+      <mat-label>Homepage</mat-label>
+      <input
+        matInput
+        id="homepageInput"
+        placeholder="Homepage eingeben"
+        formControlName="homepage"
+    /></mat-form-field>
+  </div>
+  <div style="color: red;" *ngIf="homepage.invalid && homepage.touched">
+    <div *ngIf="homepage.errors && homepage.errors.pattern">
+      <i class="material-icons">error</i>
+      <span>
+        Die eingegebene Homepage ist ungültig.
+      </span>
+    </div>
+  </div>
+</div>

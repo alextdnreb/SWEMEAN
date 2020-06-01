@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { UpdateKundeComponent } from './create-kunde.component';
 import { Title } from '@angular/platform-browser';
+import { UpdateKundeComponent } from './update-kunde.component';
 
 @NgModule({
     declarations: [UpdateKundeComponent],
@@ -8,4 +8,4 @@ import { Title } from '@angular/platform-browser';
     imports: [],
     providers: [Title],
 })
-export class UpdateKundeModlue {}
+export class UpdateKundeModule {}
