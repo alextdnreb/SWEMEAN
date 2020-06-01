@@ -1,17 +1,48 @@
 <div class="swe-desktop-menu">
-  <a routerLink="/">Titel</a>
-  <a routerLink="/kunden/suche"><i class="material-icons">search</i>Suche</a>
-  <swe-login-logout style="float: right;"></swe-login-logout>
-  <a routerLink="/kunden/create" *ngIf="isAdmin"
-    ><i class="material-icons">person_add</i>Erstellen</a
+  <a routerLink="/" class="swe-nav-link"><i class="material-icons">home</i></a>
+  <a routerLink="/kunden/create" *ngIf="isAdmin" class="swe-nav-link"
+    ><i class="material-icons">person_add</i></a
   >
+  <swe-window-controls></swe-window-controls>
+  <a [matMenuTriggerFor]="diagrams" class="swe-nav-link" *ngIf="isAdmin">
+    <i class="material-icons">keyboard_arrow_down</i>
+  </a>
+  <mat-menu #diagrams="matMenu">
+    <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
+    <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
+    <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
+  </mat-menu>
+  <a *ngIf="isAdmin" routerLink="/kunden/suche" class="swe-nav-link"
+    ><i class="material-icons">search</i></a
+  >
+  <swe-login-logout
+    [ngStyle]="{ float: preloaded ? 'none' : 'right' }"
+  ></swe-login-logout>
 </div>
-<button class="swe-mobile-menu" mat-button [matMenuTriggerFor]="menu">
-  <i class="material-icons">menu</i>
-</button>
-<mat-menu #menu="matMenu">
-  <a routerLink="/kunden/suche" mat-menu-item
-    ><i class="material-icons">search</i>Suche</a
-  >
-  <button mat-menu-item><swe-login-logout></swe-login-logout></button>
-</mat-menu>
+<div class="swe-mobile-menu">
+  <button class="swe-burger-menu" mat-button [matMenuTriggerFor]="menu">
+    <i class="material-icons">menu</i>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a routerLink="/" mat-menu-item
+      ><i class="material-icons swe-mobile-menu-icon">home</i>Home</a
+    >
+    <a routerLink="/kunden/suche" mat-menu-item
+      ><i class="material-icons swe-mobile-menu-icon">search</i>Suche</a
+    >
+    <a routerLink="/kunden/create" mat-menu-item
+      ><i class="material-icons swe-mobile-menu-icon">person_add</i>Erstellen</a
+    >
+    <span mat-menu-item [matMenuTriggerFor]="diagramme">
+      <i class="material-icons swe-mobile-menu-icon">show_chart</i>Diagramme
+    </span>
+
+    <span mat-menu-item><swe-login-logout></swe-login-logout></span>
+  </mat-menu>
+  <mat-menu #diagramme="matMenu">
+    <a routerLink="/kunden/liniendiagramm" mat-menu-item>Liniendiagramm</a>
+    <a routerLink="/kunden/balkendiagramm" mat-menu-item>Balkendiagramm</a>
+    <a routerLink="/kunden/tortendiagramm" mat-menu-item>Tortendiagramm</a>
+  </mat-menu>
+  <swe-window-controls></swe-window-controls>
+</div>

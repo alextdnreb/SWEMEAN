@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-
+const path = require('path');
 let win;
 
 function createWindow() {
@@ -9,12 +9,17 @@ function createWindow() {
         height: 600,
         backgroundColor: '#ffffff',
         icon: `file://${__dirname}/dist/assets/logo.png`,
+        webPreferences: {
+            webSecurity: false,
+            allowRunningInsecureContent: true,
+            preload: path.join(__dirname, './preload.js'),
+        },
+        frame: false,
     });
 
-    win.loadURL(`file://${__dirname}/../dist/acme/index.html`);
+    win.loadURL('https://localhost:443/');
 
-    //// uncomment below to open the DevTools.
-    // win.webContents.openDevTools()
+    // win.webContents.openDevTools();
 
     // Event when the window is closed.
     win.on('closed', function () {
@@ -24,6 +29,19 @@ function createWindow() {
 
 // Create window on electron intialization
 app.on('ready', createWindow);
+
+app.on(
+    'certificate-error',
+    (event, webContents, url, error, certificate, callback) => {
+        if (url.includes('localhost')) {
+            // Verification logic.
+            event.preventDefault();
+            callback(true);
+        } else {
+            callback(false);
+        }
+    },
+);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

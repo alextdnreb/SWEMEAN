@@ -9,10 +9,11 @@ import { Component } from '@angular/core';
     // Platzhalter fuer den Austausch der HTML-Templates (= Fragmente)
     // beim Routing
     template: `
-        <main>
-            <div class="col col-12 mt-3"><router-outlet></router-outlet></div>
+        <main style="background-color: #f5f5f7;">
+            <div class="swe-main"><router-outlet></router-outlet></div>
         </main>
     `,
+    styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {
     constructor() {

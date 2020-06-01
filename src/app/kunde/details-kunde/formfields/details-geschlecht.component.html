@@ -1,0 +1,19 @@
+<div style="padding-left: 10%; text-align: left;" [formGroup]="form">
+  <label for="geschlechtInput" class="swe-label">Geschlecht</label>
+  <mat-radio-group
+    matInput
+    id="geschlechtInput"
+    formControlName="geschlecht"
+    name="geschlecht"
+  >
+    <mat-radio-button value="D" [checked]="geschlecht.value === 'D'"
+      >Divers</mat-radio-button
+    >
+    <mat-radio-button value="M" [checked]="geschlecht.value === 'M'"
+      >Männlich</mat-radio-button
+    >
+    <mat-radio-button value="W" [checked]="geschlecht.value === 'W'"
+      >Weiblich</mat-radio-button
+    >
+  </mat-radio-group>
+</div>
