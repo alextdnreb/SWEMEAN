@@ -5,6 +5,7 @@
     matInput
     placeholder="01.1.1901"
     formControlName="geburtsdatum"
+    (focus)="picker.open()"
     [matDatepicker]="picker"
     [max]="maxDate"
   />

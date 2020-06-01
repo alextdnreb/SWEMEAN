@@ -96,7 +96,7 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
         console.log('kunde=', this.kunde);
         const successFn = () => {
             console.log(
-                `UpdateStammdaten.onUpdate(): successFn: path: ${HOME_PATH}`,
+                `DetailsKundeComponent.onUpdate(): successFn: path: ${HOME_PATH}`,
             );
             this.isUpdate = false;
             this.form.disable();
@@ -111,7 +111,7 @@ export class DetailsKundeComponent implements OnInit, OnDestroy {
             errors: { [s: string]: unknown } | undefined,
         ) => void = (status, errors?) => {
             console.error(
-                `UpdateStammdatenComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
+                `DetailsKundeComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
                 errors,
             );
         };

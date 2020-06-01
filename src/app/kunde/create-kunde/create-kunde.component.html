@@ -55,6 +55,11 @@
       <i class="material-icons">check</i>
       <span>Kunden anlegen</span>
     </button>
+    <mat-progress-bar
+      style="margin-top: 10px;"
+      *ngIf="waiting"
+      mode="indeterminate"
+    ></mat-progress-bar>
   </mat-card-content>
 </mat-card>
 <div class="mt-3">
