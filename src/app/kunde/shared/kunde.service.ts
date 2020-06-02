@@ -12,7 +12,7 @@ import {
     ChartData,
     ChartDataSets,
 } from 'chart.js';
-import { FindError, RemoveError, SaveError } from './errors';
+import { FindError, PatchError, RemoveError, SaveError } from './errors';
 // Bereitgestellt durch HttpClientModule
 // HttpClientModule enthaelt nur Services, keine Komponenten
 import {
@@ -67,6 +67,8 @@ export class KundeService {
     private readonly baseUriKunden!: string;
 
     private _kunde!: Kunde;
+
+    private _kundePicture: File;
 
     /**
      * @param diagrammService injizierter DiagrammService
@@ -295,6 +297,27 @@ export class KundeService {
         } catch (err) {
             console.log('KundeService.remove(): err=', err);
             throw new RemoveError(err.status);
+        }
+    }
+
+    async uploadPicture(kunde: Kunde, picture: File) {
+        const uri = `${this.baseUriKunden}/${kunde._id}`;
+
+        const headers = new HttpHeaders({
+            'Content-Type': picture.type,
+            Accept: 'text/plain',
+        });
+        console.log(
+            `KundeService.uploadPicture(), picture = ${JSON.stringify(
+                picture,
+            )}`,
+        );
+
+        try {
+            await this.httpClient.patch(uri, picture, { headers }).toPromise();
+        } catch (err) {
+            console.error('KundeService.uploadPicture(): err err=', err);
+            throw new PatchError(err.status);
         }
     }
 

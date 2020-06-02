@@ -1,0 +1,18 @@
+<swe-waiting *ngIf="waiting; else details"></swe-waiting>
+<ng-template #details>
+  <mat-card *ngIf="kunde; else showErrorMsg" style="text-align: center;">
+    <mat-card-content
+      ><h1 class="swe-headline">Bild</h1>
+      <hr style="width: 80%;" />
+      <img [src]="dataUrl$ | async" class="swe-img-responsive" /><br />
+      <input
+        matInput
+        type="file"
+        (change)="onPictureUpload($event)"
+        accept="image/jpeg, image/png"
+      /> </mat-card-content
+  ></mat-card>
+  <ng-template #showErrorMsg>
+    <swe-error-message [text]="errorMsg"></swe-error-message>
+  </ng-template>
+</ng-template>
