@@ -133,3 +133,7 @@ th.mat-header-cell,
 td {
   text-align: center !important;
 }
+td > a,
+td > a:hover {
+  color: #000000;
+}
