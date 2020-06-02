@@ -1,6 +1,6 @@
-<mat-card class="home-card">
+<mat-card style="cursor: initial;" class="swe-home-card">
   <mat-card-header>
-    <div mat-card-avatar class="card-header-image">
+    <div mat-card-avatar class="swe-card-header-image">
       <mat-icon [inline]="true">info</mat-icon>
     </div>
     <mat-card-title>Kundenverwaltung</mat-card-title>
@@ -10,10 +10,10 @@
   </mat-card-header>
 </mat-card>
 
-<a class="home-card" (click)="openURL('/suche')">
-  <mat-card class="home-card">
+<a class="swe-home-card" (click)="openURL('/suche')">
+  <mat-card class="swe-home-card">
     <mat-card-header>
-      <div mat-card-avatar class="card-header-image">
+      <div mat-card-avatar class="swe-card-header-image">
         <mat-icon [inline]="true">search</mat-icon>
       </div>
       <mat-card-title>Suche Kunden</mat-card-title>
@@ -27,10 +27,10 @@
   </mat-card>
 </a>
 
-<a class="home-card" (click)="openURL('/create')">
-  <mat-card class="home-card">
+<a class="swe-home-card" style="cursor: pointer;" (click)="openURL('/create')">
+  <mat-card class="swe-home-card">
     <mat-card-header>
-      <div mat-card-avatar class="card-header-image">
+      <div mat-card-avatar class="swe-card-header-image">
         <mat-icon [inline]="true">person_add</mat-icon>
       </div>
       <mat-card-title>Erstelle Kunden</mat-card-title>
@@ -42,9 +42,9 @@
   </mat-card>
 </a>
 
-<mat-card class="home-card">
+<mat-card class="swe-home-card">
   <mat-card-header>
-    <div mat-card-avatar class="card-header-image">
+    <div mat-card-avatar class="swe-card-header-image">
       <mat-icon [inline]="true">show_chart</mat-icon>
     </div>
     <mat-card-title>Diagramme</mat-card-title>

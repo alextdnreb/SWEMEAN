@@ -1,20 +1,13 @@
-<div>
-  <div>
-    <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>Ort</mat-label>
-      <input
-        matInput
-        id="ortInput"
-        placeholder="Ort eingeben"
-        class="swe-input"
-        formControlName="ort"
-    /></mat-form-field>
-
-    <div *ngIf="ort.invalid && ort.touched" style="color: red;">
-      <div *ngIf="ort.errors && ort.errors.required">
-        <i class="material-icons">error</i>
-        <span>Ein Ort muss eingegeben werden.</span>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label>Ort</mat-label>
+  <input
+    matInput
+    id="ortInput"
+    placeholder="Ort eingeben"
+    class="swe-input"
+    formControlName="ort"
+  /><mat-error
+    ><i class="material-icons">error</i>Ein Ort muss eingegeben
+    werden.</mat-error
+  ></mat-form-field
+>

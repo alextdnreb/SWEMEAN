@@ -14,9 +14,7 @@ import { Title } from '@angular/platform-browser';
 export class CreateKundeComponent implements OnInit {
     form = new FormGroup({});
 
-    showWarning = false;
-
-    fertig = false;
+    waiting = false;
 
     errorMsg: string | undefined = undefined;
     /* eslint-disable-next-line max-params */
@@ -59,20 +57,20 @@ export class CreateKundeComponent implements OnInit {
             );
             return false;
         }
-
+        this.waiting = true;
         const neuerKunde = Kunde.fromForm(this.form.value);
         console.log('CreateKundeComponent.onSave(): neuerKunde=', neuerKunde);
         let id: string | undefined;
+
         try {
             id = await this.kundeService.save(neuerKunde);
             console.log(`CreateKundeComponent.onSave(): id=${id}`);
         } catch (err) {
             this.handleError(err);
             return;
+        } finally {
+            this.waiting = false;
         }
-
-        this.fertig = true;
-        this.showWarning = false;
         await this.router.navigate(['..', id], { relativeTo: this.route });
         this.snackBar.open('Kunde erfolgreich erstellt', 'Schließen', {
             duration: 3000,

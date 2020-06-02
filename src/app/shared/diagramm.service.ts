@@ -47,7 +47,7 @@ export class DiagrammService {
     private static readonly DEFAULT_HIGHLIGHT_COLOR = '#F7464A';
 
     private readonly backgroundColors = new Map<number, ColorHighlight>();
-
+    /* eslint-disable-next-line max-lines-per-function */
     constructor() {
         // red
         this.backgroundColors.set(0, {
@@ -80,14 +80,32 @@ export class DiagrammService {
 
         // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         this.backgroundColors.set(5, {
-            color: '#18BBBF',
-            highlight: '#20E6EA',
+            color: '#ff96ff',
+            highlight: '#ffb5ff',
         });
 
         // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         this.backgroundColors.set(6, {
             color: '#C9C319',
             highlight: '#E8E11F',
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(7, {
+            color: '#37a2b8',
+            highlight: '#41c5e0',
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(8, {
+            color: '#201d30',
+            highlight: '#3b3659',
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        this.backgroundColors.set(9, {
+            color: '#e3ff8f',
+            highlight: '#f1ffc7',
         });
 
         console.log(
@@ -136,7 +154,7 @@ export class DiagrammService {
      * @return String mit dem Hex-Code der Farbe.
      */
     getBackgroundColor(idx: number) {
-        const colorHighlight = this.backgroundColors.get(idx % 7); // eslint-disable-line @typescript-eslint/no-magic-numbers
+        const colorHighlight = this.backgroundColors.get(idx % 10); // eslint-disable-line @typescript-eslint/no-magic-numbers
         return colorHighlight === undefined
             ? DiagrammService.DEFAULT_COLOR
             : colorHighlight.color;
@@ -148,7 +166,7 @@ export class DiagrammService {
      * @return String mit dem Hex-Code dieser Farbe.
      */
     getHoverBackgroundColor(idx: number) {
-        const backgroundColor = this.backgroundColors.get(idx % 7); // eslint-disable-line @typescript-eslint/no-magic-numbers
+        const backgroundColor = this.backgroundColors.get(idx % 10); // eslint-disable-line @typescript-eslint/no-magic-numbers
         return backgroundColor === undefined
             ? DiagrammService.DEFAULT_HIGHLIGHT_COLOR
             : backgroundColor.highlight;

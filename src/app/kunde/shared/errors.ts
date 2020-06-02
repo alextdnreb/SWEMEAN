@@ -53,4 +53,14 @@ export class RemoveError extends Error {
     }
 }
 
+export class PatchError extends Error {
+    readonly statuscode: number;
+
+    constructor(statuscode: number) {
+        super(statuscode.toString());
+        this.name = 'PatchError';
+        this.statuscode = statuscode;
+    }
+}
+
 /* eslint-enable max-classes-per-file */

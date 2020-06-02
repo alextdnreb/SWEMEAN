@@ -246,13 +246,7 @@ export class Kunde {
     }
 
     /**
-     * Aktualisierung der Stammdaten des Buch-Objekts.
-     * @param titel Der neue Buchtitel
-     * @param rating Die neue Bewertung
-     * @param art Die neue Buchart (DRUCKAUSGABE oder KINDLE)
-     * @param verlag Der neue Verlag
-     * @param preis Der neue Preis
-     * @param rabatt Der neue Rabatt
+     * Aktualisierung der Stammdaten des Kunden-Objekts.
      */
     // eslint-disable-next-line max-params
     update(

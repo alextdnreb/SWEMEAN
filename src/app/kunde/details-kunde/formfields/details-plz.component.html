@@ -1,23 +1,15 @@
-<div>
-  <div>
-    <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>Postleitzahl</mat-label>
-      <input
-        matInput
-        id="plzInput"
-        placeholder="Postleitzahl eingeben"
-        formControlName="plz"
-    /></mat-form-field>
-
-    <div style="color: red;" *ngIf="plz.invalid && plz.touched">
-      <div *ngIf="plz.errors && plz.errors.required">
-        <i class="material-icons">error</i>
-        <span>Eine Postleitzahl muss eingegeben werden.</span>
-      </div>
-      <div *ngIf="plz.errors && plz.errors.pattern">
-        <i class="material-icons">error</i>
-        <span>Die eingegebene PLZ ist keine gültige deutsche Postleitzahl</span>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label>Postleitzahl</mat-label>
+  <input
+    matInput
+    id="plzInput"
+    placeholder="Postleitzahl eingeben"
+    formControlName="plz"
+  /><mat-error
+    ><i class="material-icons">error</i>Eine Postleitzahl muss eingegeben
+    werden.</mat-error
+  ><mat-error
+    ><i class="material-icons">error</i>Die eingegebene PLZ ist keine gültige
+    deutsche Postleitzahl</mat-error
+  ></mat-form-field
+>

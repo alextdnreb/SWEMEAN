@@ -1,20 +1,15 @@
-<div>
-  <div>
-    <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>Homepage</mat-label>
-      <input
-        matInput
-        id="homepageInput"
-        placeholder="Homepage eingeben"
-        formControlName="homepage"
-    /></mat-form-field>
-  </div>
-  <div style="color: red;" *ngIf="homepage.invalid && homepage.touched">
-    <div *ngIf="homepage.errors && homepage.errors.pattern">
-      <i class="material-icons">error</i>
-      <span>
-        Die eingegebene Homepage ist ungültig.
-      </span>
-    </div>
-  </div>
-</div>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label>Homepage</mat-label>
+  <input
+    matInput
+    id="homepageInput"
+    placeholder="Homepage eingeben"
+    formControlName="homepage"
+  /><mat-error *ngIf="homepage.invalid && homepage.touched"
+    ><i class="material-icons">error</i>Die Syntax der Homepage muss dem in
+    <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC2396</a> definierten
+    Format entsprechen. URLs, die nach der Spezifikation
+    <a href="https://www.ietf.org/rfc/rfc2732.txt">RFC2732</a> gültig sind,
+    werden auch unterstützt.</mat-error
+  ></mat-form-field
+>

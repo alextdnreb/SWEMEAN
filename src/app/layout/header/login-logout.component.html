@@ -1,5 +1,6 @@
 <a
   *ngIf="notLoggedIn; else loggedIn"
+  mat-menu-item
   class="swe-nav-link"
   (click)="openDialog()"
 >
@@ -7,7 +8,7 @@
 </a>
 
 <ng-template #loggedIn>
-  <a class="swe-nav-link" (click)="onLogout()">
+  <a class="swe-nav-link" mat-menu-item (click)="onLogout()">
     <i class="material-icons swe-mobile-menu-icon">logout</i>Logout
   </a>
 </ng-template>

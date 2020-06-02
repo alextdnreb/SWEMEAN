@@ -1,7 +1,10 @@
-import { AuthService } from '../auth/auth.service';
-// eslint-disable-next-line sort-imports
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LoginDialogComponent } from '../layout/header/login-dialog.component';
+import {
+    Credentials,
+    LoginDialogComponent,
+} from '../layout/header/login-dialog.component';
+
+import { AuthService } from '../auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -44,28 +47,26 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.isLoggedInSubscription.unsubscribe();
     }
 
-    openDialog(): void {
+    async openDialog(path?: string): Promise<void> {
         const dialogRef = this.dialog.open(LoginDialogComponent, {
             width: '250px',
             data: { username: this.username, password: this.password },
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-            if (result) {
-                // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                this.authService.login(result.username, result.password);
-            }
-        });
+        const result: Credentials = await dialogRef.afterClosed().toPromise();
+
+        await this.authService.login(result.username, result.password);
+        if (!this.notLoggedIn && path !== undefined) {
+            await this.router.navigateByUrl(path);
+        }
     }
 
-    openURL(path: string) {
+    async openURL(path: string) {
         if (this.notLoggedIn) {
             this.path = path;
-            this.openDialog();
+            await this.openDialog(path);
         } else {
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            this.router.navigateByUrl(path);
+            await this.router.navigateByUrl(path);
         }
     }
 
@@ -75,8 +76,8 @@ export class HomeComponent implements OnInit, OnDestroy {
      * <code>ngOnInit</code> aufgerufen.
      */
     private subscribeLogin() {
-        const next = (event: boolean) => {
-            if (this.notLoggedIn && !event) {
+        const next = (event: string | undefined) => {
+            if (this.notLoggedIn && event === undefined) {
                 // Noch nicht eingeloggt und ein Login-Event kommt, d.h.
                 // es gab einen Login-Versuch, der aber fehlerhaft (= false) war
                 console.warn('AuthComponent: Falsche Login-Daten', event);
@@ -85,19 +86,17 @@ export class HomeComponent implements OnInit, OnDestroy {
                     duration: 3000,
                     panelClass: 'swe-error-snackbar',
                 });
-
-                if (!this.dialog.openDialogs.length) {
-                    this.openDialog();
+                if (this.dialog.openDialogs.length === 0) {
+                    this.openDialog().catch(err => console.log(err));
                 }
+            } else if (event !== undefined) {
+                this.snackBar.open(`Herzlich Wilkommen ${event}`, 'Schließen', {
+                    duration: 3000,
+                    panelClass: 'swe-success-snackbar',
+                });
             }
-            this.notLoggedIn = !event;
+            this.notLoggedIn = event === undefined;
             console.log('AuthComponent.notLoggedIn:', this.notLoggedIn);
-            if (!this.notLoggedIn && this.path.length > 0) {
-                this.router
-                    .navigateByUrl(this.path)
-                    .catch(err => console.log(err));
-                this.path = '';
-            }
         };
 
         // Observable.subscribe() aus RxJS liefert ein Subscription Objekt,

@@ -1,20 +1,13 @@
-<div>
-  <div>
-    <mat-form-field appearance="outline" [formGroup]="form">
-      <mat-label>Betrag</mat-label>
-      <input
-        matInput
-        id="betragInput"
-        placeholder="Betrag eingeben"
-        formControlName="betrag"
-    /></mat-form-field>
-  </div>
-  <div style="color: red;" *ngIf="betrag.invalid && betrag.touched">
-    <div *ngIf="betrag.errors && betrag.errors.pattern">
-      <i class="material-icons">error</i>
-      <span>
-        Der eingegebene Betrag ist ungültig.
-      </span>
-    </div>
-  </div>
-</div>
+<mat-form-field appearance="outline" [formGroup]="form">
+  <mat-label>Betrag</mat-label>
+  <input
+    matInput
+    id="betragInput"
+    placeholder="Betrag eingeben"
+    formControlName="betrag"
+  />
+  <mat-error *ngIf="betrag.invalid && betrag.touched">
+    <i class="material-icons">error</i>Der eingegebene Betrag ist
+    ungültig.</mat-error
+  >
+</mat-form-field>

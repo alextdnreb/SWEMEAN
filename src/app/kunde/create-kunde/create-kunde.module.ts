@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgModule } from '@angular/core';
@@ -55,6 +56,7 @@ import { Title } from '@angular/platform-browser';
         CreateUsernameModule,
         CreatePasswordModule,
         DetailsInteressenModule,
+        MatProgressBarModule,
     ],
     providers: [Title],
 })
