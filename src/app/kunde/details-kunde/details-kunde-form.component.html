@@ -87,6 +87,11 @@
         <i class="material-icons">check</i>
         <span>Kunden aktualisieren</span>
       </button>
+      <mat-progress-bar
+        style="margin-top: 10px;"
+        *ngIf="formWaiting"
+        mode="indeterminate"
+      ></mat-progress-bar>
     </mat-card-content>
   </mat-card>
   <ng-template #showErrorMsg>

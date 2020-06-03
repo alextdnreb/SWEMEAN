@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -50,6 +51,7 @@ import { WaitingModule } from '../../shared/waiting.module';
         DetailsBetragModule,
         DetailsOrtModule,
         DetailsPlzModule,
+        MatProgressBarModule,
     ],
     providers: [Title],
 })

@@ -17,6 +17,8 @@ import { Title } from '@angular/platform-browser';
 export class DetailsKundeFormComponent implements OnInit, OnDestroy {
     waiting = true;
 
+    formWaiting = false;
+
     kunde: Kunde | undefined;
 
     errorMsg: string | undefined;
@@ -75,7 +77,7 @@ export class DetailsKundeFormComponent implements OnInit, OnDestroy {
             );
             return;
         }
-
+        this.formWaiting = true;
         this.kunde.update(
             this.form.value.nachname,
             this.form.value.email,
@@ -100,6 +102,7 @@ export class DetailsKundeFormComponent implements OnInit, OnDestroy {
                 `DetailsKundeFormComponent.onUpdate(): successFn: path: ${HOME_PATH}`,
             );
             this.isUpdate = false;
+            this.formWaiting = false;
             this.form.disable();
             this.snackBar.open('Ändern erfolgreich', 'Schließen', {
                 duration: 3000,
@@ -111,6 +114,7 @@ export class DetailsKundeFormComponent implements OnInit, OnDestroy {
             status: number,
             errors: { [s: string]: unknown } | undefined,
         ) => void = (status, errors?) => {
+            this.formWaiting = false;
             console.error(
                 `DetailsKundeFormComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
                 errors,
