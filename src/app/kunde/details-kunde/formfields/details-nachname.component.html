@@ -9,7 +9,7 @@
   /><mat-error *ngIf="nachname.errors && nachname.errors.required"
     ><i class="material-icons">error</i>Ein Nachname muss eingegeben
     werden.</mat-error
-  ><mat-error
+  ><mat-error *ngIf="nachname.errors && nachname.errors.pattern"
     ><i class="material-icons">error</i>Bei Nachnamen ist nach einem
     Großbuchstaben mindestens ein Kleinbuchstabe notwendig; Doppelnamen sind
     möglich.</mat-error

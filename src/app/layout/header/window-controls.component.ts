@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./window-controls.component.scss'],
 })
 export class WindowControlsComponent implements OnInit {
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     preloaded: any | undefined;
     constructor() {
         console.log('WindowControls.constructor()');

@@ -1,8 +1,3 @@
-/*BILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- */
-
 import { HttpClientModule } from '@angular/common/http';
 import { LiniendiagrammComponent } from './liniendiagramm.component';
 import { NgModule } from '@angular/core';

@@ -30,9 +30,11 @@ export class DetailsBetragComponent implements OnInit {
                 value: this.currentValue,
                 disabled: this.isDisabled,
             },
+            /* eslint-disable array-bracket-newline */
             Validators.compose([
                 Validators.pattern(DetailsBetragComponent.betragRegex),
             ]),
+            /* eslint-enable array-bracket-newline */
         );
         this.form.addControl('betrag', this.betrag);
     }

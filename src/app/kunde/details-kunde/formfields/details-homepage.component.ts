@@ -30,9 +30,11 @@ export class DetailsHomepageComponent implements OnInit {
                 value: this.currentValue,
                 disabled: this.isDisabled,
             },
+            /* eslint-disable array-bracket-newline */
             Validators.compose([
                 Validators.pattern(DetailsHomepageComponent.homepageRegex),
             ]),
+            /* eslint-enable array-bracket-newline */
         );
         this.form.addControl('homepage', this.homepage);
     }

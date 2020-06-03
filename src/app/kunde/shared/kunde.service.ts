@@ -68,8 +68,6 @@ export class KundeService {
 
     private _kunde!: Kunde;
 
-    private _kundePicture: File;
-
     /**
      * @param diagrammService injizierter DiagrammService
      * @param httpClient injizierter Service HttpClient (von Angular)
@@ -404,9 +402,11 @@ export class KundeService {
             type: 'bar',
             data: { labels, datasets },
             options: {
+                /* eslint-disable object-curly-newline */
                 legend: {
                     display: false,
                 },
+                /* eslint-enable object-curly-newline */
                 scales: {
                     yAxes: [
                         {

@@ -14,6 +14,8 @@ import { Subscription } from 'rxjs';
 })
 export class NavComponent implements OnInit, OnDestroy {
     isAdmin!: boolean;
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     preloaded: any | undefined;
     private isAdminSubscription!: Subscription;
 

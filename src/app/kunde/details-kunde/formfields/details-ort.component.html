@@ -6,7 +6,7 @@
     placeholder="Ort eingeben"
     class="swe-input"
     formControlName="ort"
-  /><mat-error
+  /><mat-error *ngIf="ort.errors && ort.errors.required"
     ><i class="material-icons">error</i>Ein Ort muss eingegeben
     werden.</mat-error
   ></mat-form-field
