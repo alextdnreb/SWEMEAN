@@ -54,8 +54,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
 
         const result: Credentials = await dialogRef.afterClosed().toPromise();
-
-        await this.authService.login(result.username, result.password);
+        if (result.username !== undefined && result.password !== undefined) {
+            await this.authService.login(result.username, result.password);
+        }
         if (!this.notLoggedIn && path !== undefined) {
             await this.router.navigateByUrl(path);
         }

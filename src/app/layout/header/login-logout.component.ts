@@ -74,7 +74,7 @@ export class LoginLogoutComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if (result) {
+            if (result && result.username && result.password) {
                 this.authService.login(result.username, result.password);
             }
         });
